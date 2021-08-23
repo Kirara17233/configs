@@ -19,9 +19,9 @@ sed -i "s|#Color|Color|g" /etc/pacman.conf
 sed -i "s|# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) NOPASSWD:ALL|g" /etc/sudoers
 
 # 配置
-git clone --depth=1 https://Kirara17233:$gitpw@gitlab.com/Kirara17233/rsa.git /root/rsa
 mkdir /etc/ssh/.ssh
 cp /root/rsa/authorized_keys /etc/ssh/.ssh/authorized_keys
+curl -o /etc/ssh/.ssh/authorized_keys "https://raw.githubusercontent.com/Kirara17233/config/main/.ssh/authorized_keys"
 ln -s /etc/ssh/.ssh /etc/skel/.ssh
 
 git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /etc/oh-my-zsh
