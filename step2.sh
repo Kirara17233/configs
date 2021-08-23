@@ -1,72 +1,74 @@
 #!/usr/bin/zsh
 
-rootpw=#rootpw
 user=#user
-gitpw=#gitpw
+userpw=#userpw
 
-# 设置时区
-ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
-hwclock --systohc
+# 创建交换文件
+dd if=/dev/zero of=/swapfile bs=1M count=8192 status=progress
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+sed -i "7i /swapfile                                       none            swap            defaults        0 0" /etc/fstab
 
-# 链接neovim
-ln -s /usr/bin/nvim /usr/bin/vi
-ln -s /usr/bin/nvim /usr/bin/vim
+# 新建用户
+useradd -m -G wheel $user
+echo "$user:$userpw" | chpasswd
+groupadd autologin
+gpasswd -a $user autologin
 
-# 开启pacman色彩选项
-sed -i "s|#Color|Color|g" /etc/pacman.conf
+# 安装yay
+su $user <<EOF
+git clone --depth=1 https://aur.archlinux.org/yay.git /home/$user/yay
+cd /home/$user/yay
+makepkg -rsi --noconfirm
+cd ..
+rm -rf /home/$user/yay
+EOF
 
-# visudo
-sed -i "s|# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) NOPASSWD:ALL|g" /etc/sudoers
+# 下载vim-plug
 
-# 配置
-git clone --depth=1 https://Kirara17233:$gitpw@gitlab.com/Kirara17233/rsa.git /root/rsa
-mkdir /etc/ssh/.ssh
-cp /root/rsa/authorized_keys /etc/ssh/.ssh/authorized_keys
-ln -s /etc/ssh/.ssh /etc/skel/.ssh
+mkdir /etc/xdg/nvim/autoload
+curl -fLo /etc/xdg/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+echo "
+call plug#begin('~/.nvim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jiangmiao/auto-pairs'
+call plug#end()
 
-git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /etc/oh-my-zsh
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /etc/oh-my-zsh/custom/themes/powerlevel10k
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git /etc/oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone --depth=1 https://gitlab.com/Kirara17233/config.git /root/config
-cp /root/config/.p10k.zsh /etc/oh-my-zsh/.p10k.zsh
-cp /root/config/.zshrc /etc/oh-my-zsh/.zshrc
-ln -s /etc/oh-my-zsh/.zshrc /etc/skel/.zshrc
-ln -s /etc/oh-my-zsh/.zshrc /root/.zshrc
+nmap <silent> q :q! <cr>
 
-mkdir /etc/xmonad
-cp /root/config/xmonad.hs /etc/xmonad/xmonad.hs
-mkdir /etc/skel/.xmonad
-ln -s /etc/xmonad/xmonad.hs /etc/skel/.xmonad/xmonad.hs
+let g:airline_powerline_fonts = 1
+\"let g:airline_theme='deus'
+let g:airline_theme='bubblegum'
+\"let g:airline_theme='minimalist'
+set nu" >> /etc/xdg/nvim/sysinit.vim
 
-rm -rf /root/rsa
-rm -rf /root/config
+# 安装软件
+su $user <<EOF
+yay -S --noconfirm curl wget neofetch xf86-video-vmware xorg-server xorg-xprop gtk3 lightdm numlockx xmonad xmonad-contrib rofi ttf-meslo-nerd-font-powerlevel10k ttf-jetbrains-mono noto-fonts-sc nix open-vm-tools jdk-openjdk jetbrains-toolbox visual-studio-code-bin google-chrome
+EOF
 
-# 设置Locale
-sed -i "s|#en_US.UTF-8 UTF-8|en_US.UTF-8 UTF-8|g" /etc/locale.gen
-sed -i "s|#zh_CN.UTF-8 UTF-8|zh_CN.UTF-8 UTF-8|g" /etc/locale.gen
-locale-gen
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
+systemctl enable lightdm vmtoolsd vmware-vmblock-fuse
 
-# 设置主机名
-echo "Arch" > /etc/hostname
-echo "127.0.0.1	localhost
-::1		localhost
-127.0.1.1	Arch.localdomain	Arch" >> /etc/hosts
+# 安装termonad
 
-# 设置Root密码
-echo "root:$rootpw" | chpasswd
+git clone --depth=1 https://github.com/cdepillabout/termonad /root/termonad
+cd /root/termonad
+nix-build
+cp /root/termonad/result/bin/termonad /usr/bin/termonad
 
-# 引导
-pacman -S --noconfirm intel-ucode grub efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
-grub-mkconfig -o /boot/grub/grub.cfg
+# 启用自动登录
+sed -i "118i session-setup-script=/usr/bin/numlockx on" /etc/lightdm/lightdm.conf
+sed -i "s|#autologin-user=|autologin-user=$user|g" /etc/lightdm/lightdm.conf
+sed -i "s|#autologin-session=|autologin-session=xmonad|g" /etc/lightdm/lightdm.conf
 
-# 配置网络
-systemctl enable dhcpcd sshd
+# 解除
+systemctl disable install
 
-# 链接
-systemctl enable install
+# 清理文件
+rm /usr/lib/systemd/system/install.service
+rm /step*.sh
 
-# 退出chroot
-exit
+# 重启
+reboot

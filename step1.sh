@@ -1,57 +1,72 @@
 #!/usr/bin/zsh
 
-# 更新系统时间
-timedatectl set-ntp true
+rootpw=#rootpw
+user=#user
+gitpw=#gitpw
 
-# 分区与格式化
+# 设置时区
+ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+hwclock --systohc
 
-echo "g
-n
+# 链接neovim
+ln -s /usr/bin/nvim /usr/bin/vi
+ln -s /usr/bin/nvim /usr/bin/vim
 
+# 开启pacman色彩选项
+sed -i "s|#Color|Color|g" /etc/pacman.conf
 
-+512M
-t
-1
-n
+# visudo
+sed -i "s|# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) NOPASSWD:ALL|g" /etc/sudoers
 
+# 配置
+mkdir /etc/ssh/.ssh
+cp /root/rsa/authorized_keys /etc/ssh/.ssh/authorized_keys
+curl -o /etc/ssh/.ssh/authorized_keys "https://raw.githubusercontent.com/Kirara17233/config/main/.ssh/authorized_keys"
+ln -s /etc/ssh/.ssh /etc/skel/.ssh
 
+git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /etc/oh-my-zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /etc/oh-my-zsh/custom/themes/powerlevel10k
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git /etc/oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone --depth=1 https://gitlab.com/Kirara17233/config.git /root/config
+cp /root/config/.p10k.zsh /etc/oh-my-zsh/.p10k.zsh
+cp /root/config/.zshrc /etc/oh-my-zsh/.zshrc
+ln -s /etc/oh-my-zsh/.zshrc /etc/skel/.zshrc
+ln -s /etc/oh-my-zsh/.zshrc /root/.zshrc
 
-w" | fdisk /dev/sda
+mkdir /etc/xmonad
+cp /root/config/xmonad.hs /etc/xmonad/xmonad.hs
+mkdir /etc/skel/.xmonad
+ln -s /etc/xmonad/xmonad.hs /etc/skel/.xmonad/xmonad.hs
 
-# 格式化分区
-mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/sda2
+rm -rf /root/rsa
+rm -rf /root/config
 
-# 挂载分区
-mount /dev/sda2 /mnt
-mkdir /mnt/boot
-mount /dev/sda1 /mnt/boot
+# 设置Locale
+sed -i "s|#en_US.UTF-8 UTF-8|en_US.UTF-8 UTF-8|g" /etc/locale.gen
+sed -i "s|#zh_CN.UTF-8 UTF-8|zh_CN.UTF-8 UTF-8|g" /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
-# 安装基本包
-pacstrap /mnt base base-devel linux linux-firmware dhcpcd openssh neovim sudo zsh git
+# 设置主机名
+echo "Arch" > /etc/hostname
+echo "127.0.0.1	localhost
+::1		localhost
+127.0.1.1	Arch.localdomain	Arch" >> /etc/hosts
 
-# 配置shell
-rm /mnt/etc/skel/.bash*
-sed -i "s|/bin/bash|/usr/bin/zsh|g" /mnt/etc/default/useradd
-sed -i "s|/bin/bash|/usr/bin/zsh|g" /mnt/etc/passwd
+# 设置Root密码
+echo "root:$rootpw" | chpasswd
 
-# 配置Fstab
-genfstab -U /mnt >> /mnt/etc/fstab
+# 引导
+pacman -S --noconfirm intel-ucode grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
+grub-mkconfig -o /boot/grub/grub.cfg
 
-# 下载后续脚本
-curl -o /mnt/step2.sh "https://gitlab.com/Kirara17233/config/-/raw/main/step2.sh?inline=false"
-curl -o /mnt/step3.sh "https://gitlab.com/Kirara17233/config/-/raw/main/step3.sh?inline=false"
-curl -o /mnt/usr/lib/systemd/system/install.service "https://gitlab.com/Kirara17233/config/-/raw/main/install.service?inline=false"
-chmod +x /mnt/step*.sh
-sed -i "s|#rootpw|$1|g" /mnt/step*.sh
-sed -i "s|#user|$2|g" /mnt/step*.sh
-sed -i "s|#userpw|$3|g" /mnt/step*.sh
-sed -i "s|#gitpw|$4|g" /mnt/step*.sh
+# 配置网络
+systemctl enable dhcpcd sshd
 
-# Chroot
-arch-chroot /mnt /step2.sh
+# 链接
+systemctl enable install
 
-# 重启
-umount /mnt/boot
-umount /mnt
-reboot
+# 退出chroot
+exit
