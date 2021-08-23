@@ -39,9 +39,9 @@ sed -i "s|/bin/bash|/usr/bin/zsh|g" /mnt/etc/passwd
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # 下载后续脚本
-curl -o /mnt/step2.sh "https://gitlab.com/Kirara17233/config/-/raw/main/step2.sh?inline=false"
-curl -o /mnt/step3.sh "https://gitlab.com/Kirara17233/config/-/raw/main/step3.sh?inline=false"
-curl -o /mnt/usr/lib/systemd/system/install.service "https://gitlab.com/Kirara17233/config/-/raw/main/install.service?inline=false"
+curl -o /mnt/step2.sh "https://raw.githubusercontent.com/Kirara17233/config/main/step2.sh"
+curl -o /mnt/step3.sh "https://raw.githubusercontent.com/Kirara17233/config/main/step3.sh"
+curl -o /mnt/usr/lib/systemd/system/install.service "https://raw.githubusercontent.com/Kirara17233/config/main/install.service"
 chmod +x /mnt/step*.sh
 sed -i "s|#rootpw|$1|g" /mnt/step*.sh
 sed -i "s|#user|$2|g" /mnt/step*.sh
