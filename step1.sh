@@ -31,7 +31,6 @@ git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /etc/oh-my-zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /etc/oh-my-zsh/custom/themes/powerlevel10k
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git /etc/oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone --depth=1 https://gitlab.com/Kirara17233/config.git /root/config
 curl -o /etc/oh-my-zsh/.p10k.zsh "$gitrepo/.p10k.zsh"
 curl -o /etc/oh-my-zsh/.zshrc "$gitrepo/.zshrc"
 ln -s /etc/oh-my-zsh/.zshrc /etc/skel/.zshrc
