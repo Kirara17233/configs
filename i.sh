@@ -48,7 +48,6 @@ chmod +x /mnt/step*.sh
 sed -i "s|#rootpw|$1|g" /mnt/step*.sh
 sed -i "s|#user|$2|g" /mnt/step*.sh
 sed -i "s|#userpw|$3|g" /mnt/step*.sh
-sed -i "s|#gitpw|$4|g" /mnt/step*.sh
 
 # 开启pacman色彩选项
 sed -i "s|#Color|Color|g" /mnt/etc/pacman.conf
