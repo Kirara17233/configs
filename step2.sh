@@ -46,7 +46,7 @@ set nu" >> /etc/xdg/nvim/sysinit.vim
 
 # 安装软件
 su $user <<EOF
-yay -S --noconfirm curl wget neofetch xf86-video-vmware xorg-server xorg-xprop gtk3 lightdm numlockx xmonad xmonad-contrib rofi ttf-meslo-nerd-font-powerlevel10k ttf-jetbrains-mono noto-fonts-sc nix open-vm-tools jdk-openjdk jetbrains-toolbox visual-studio-code-bin google-chrome
+yay -S --noconfirm curl wget neofetch xf86-video-vmware xorg-server gtk3 lightdm numlockx xmonad xmonad-contrib rofi ttf-meslo-nerd-font-powerlevel10k ttf-jetbrains-mono noto-fonts-sc nix open-vm-tools jdk-openjdk jetbrains-toolbox visual-studio-code-bin google-chrome
 EOF
 
 systemctl enable lightdm vmtoolsd vmware-vmblock-fuse
