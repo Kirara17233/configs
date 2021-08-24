@@ -39,14 +39,19 @@ sed -i "s|/bin/bash|/usr/bin/zsh|g" /mnt/etc/passwd
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # 下载后续脚本
-curl -o /mnt/step1.sh "https://raw.githubusercontent.com/Kirara17233/config/main/step1.sh"
-curl -o /mnt/step2.sh "https://raw.githubusercontent.com/Kirara17233/config/main/step2.sh"
+for loop in 1 2 3
+do
+    curl -o /mnt/step$loop.sh "https://raw.githubusercontent.com/Kirara17233/config/main/step$loop.sh"
+done
 curl -o /mnt/usr/lib/systemd/system/install.service "https://raw.githubusercontent.com/Kirara17233/config/main/install.service"
 chmod +x /mnt/step*.sh
 sed -i "s|#rootpw|$1|g" /mnt/step*.sh
 sed -i "s|#user|$2|g" /mnt/step*.sh
 sed -i "s|#userpw|$3|g" /mnt/step*.sh
 sed -i "s|#gitpw|$4|g" /mnt/step*.sh
+
+# 开启pacman色彩选项
+sed -i "s|#Color|Color|g" /mnt/etc/pacman.conf
 
 # Chroot
 arch-chroot /mnt /step1.sh
