@@ -2,7 +2,6 @@
 
 user=#user
 userpw=#userpw
-token=#token
 
 # 创建交换文件
 dd if=/dev/zero of=/swapfile bs=1M count=8192 status=progress
