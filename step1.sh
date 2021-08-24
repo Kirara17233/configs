@@ -16,8 +16,9 @@ ln -s /usr/bin/nvim /usr/bin/vim
 sed -i "s|# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) NOPASSWD:ALL|g" /etc/sudoers
 
 # 配置
-curl -o /etc/ssh/authorized_keys "$gitrep/.ssh/authorized_keys"
-ln -s /etc/ssh/authorized_keys /etc/skel/.ssh/authorized_keys
+mkdir /etc/ssh/.ssh
+curl -o /etc/ssh/.ssh/authorized_keys "$gitrep/.ssh/authorized_keys"
+ln -s /etc/ssh/.ssh/authorized_keys /etc/skel/.ssh/authorized_keys
 
 git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /etc/oh-my-zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /etc/oh-my-zsh/custom/themes/powerlevel10k
