@@ -5,7 +5,7 @@ Description="install"
 Type=idle
 User=root
 Group=root
-ExecStart=/step3.sh
+ExecStart=/step2.sh
 
 [Install]
 WantedBy=multi-user.target
