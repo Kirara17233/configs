@@ -18,12 +18,12 @@ ln -s /usr/bin/nvim /usr/bin/vim
 sed -i "s|# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) NOPASSWD:ALL|g" /etc/sudoers
 
 # 配置
+mkdir /etc/ssh/.ssh
+mkdir /etc/skel/.ssh
 curl -o /etc/ssh/.ssh/id_rsa "https://raw.githubusercontent.com/Kirara17233/rsa/main/id_rsa?token=$token"
 ln -s /etc/ssh/.ssh/id_rsa /etc/skel/.ssh/id_rsa
 ln -s /etc/ssh/.ssh/id_rsa /home/$user/.ssh/id_rsa
-rm /step3.sh
 
-mkdir /etc/ssh/.ssh
 curl -o /etc/ssh/.ssh/authorized_keys "$gitrep/.ssh/authorized_keys"
 ln -s /etc/ssh/.ssh/authorized_keys /etc/skel/.ssh/authorized_keys
 
