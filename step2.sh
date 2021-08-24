@@ -2,6 +2,7 @@
 
 user=#user
 userpw=#userpw
+token=#token
 
 # 创建交换文件
 dd if=/dev/zero of=/swapfile bs=1M count=8192 status=progress
@@ -26,7 +27,6 @@ rm -rf /home/$user/yay
 EOF
 
 # 下载vim-plug
-
 mkdir /etc/xdg/nvim/autoload
 curl -fLo /etc/xdg/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo "
@@ -52,7 +52,6 @@ EOF
 systemctl enable lightdm vmtoolsd vmware-vmblock-fuse
 
 # 安装termonad
-
 git clone --depth=1 https://github.com/cdepillabout/termonad /root/termonad
 cd /root/termonad
 nix-build
