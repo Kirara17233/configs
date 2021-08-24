@@ -4,7 +4,7 @@ rootpw=#rootpw
 user=#user
 token=#token
 
-gitrep=https://raw.githubusercontent.com/Kirara17233/config/main
+gitrepo=https://raw.githubusercontent.com/Kirara17233/config/main
 
 # 设置时区
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
@@ -24,7 +24,7 @@ curl -o /etc/ssh/.ssh/id_rsa "https://raw.githubusercontent.com/Kirara17233/rsa/
 ln -s /etc/ssh/.ssh/id_rsa /etc/skel/.ssh/id_rsa
 ln -s /etc/ssh/.ssh/id_rsa /home/$user/.ssh/id_rsa
 
-curl -o /etc/ssh/.ssh/authorized_keys "$gitrep/.ssh/authorized_keys"
+curl -o /etc/ssh/.ssh/authorized_keys "$gitrepo/.ssh/authorized_keys"
 ln -s /etc/ssh/.ssh/authorized_keys /etc/skel/.ssh/authorized_keys
 
 git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /etc/oh-my-zsh
@@ -32,13 +32,13 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /etc/oh-my-zsh/
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git /etc/oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone --depth=1 https://gitlab.com/Kirara17233/config.git /root/config
-curl -o /etc/oh-my-zsh/.p10k.zsh "$gitrep/.p10k.zsh"
-curl -o /etc/oh-my-zsh/.zshrc "$gitrep/.zshrc"
+curl -o /etc/oh-my-zsh/.p10k.zsh "$gitrepo/.p10k.zsh"
+curl -o /etc/oh-my-zsh/.zshrc "$gitrepo/.zshrc"
 ln -s /etc/oh-my-zsh/.zshrc /etc/skel/.zshrc
 ln -s /etc/oh-my-zsh/.zshrc /root/.zshrc
 
 mkdir /etc/xmonad
-curl -o /etc/xmonad/xmonad.hs "$gitrep/xmonad.hs"
+curl -o /etc/xmonad/xmonad.hs "$gitrepo/xmonad.hs"
 mkdir /etc/skel/.xmonad
 ln -s /etc/xmonad/xmonad.hs /etc/skel/.xmonad/xmonad.hs
 
