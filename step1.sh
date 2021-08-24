@@ -2,7 +2,7 @@
 
 rootpw=#rootpw
 user=#user
-gitpw=#gitpw
+gitrep=https://raw.githubusercontent.com/Kirara17233/config/main
 
 # 设置时区
 ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
@@ -12,35 +12,27 @@ hwclock --systohc
 ln -s /usr/bin/nvim /usr/bin/vi
 ln -s /usr/bin/nvim /usr/bin/vim
 
-# 开启pacman色彩选项
-sed -i "s|#Color|Color|g" /etc/pacman.conf
-
 # visudo
 sed -i "s|# %wheel ALL=(ALL) ALL|%wheel ALL=(ALL) NOPASSWD:ALL|g" /etc/sudoers
 
 # 配置
-mkdir /etc/ssh/.ssh
-cp /root/rsa/authorized_keys /etc/ssh/.ssh/authorized_keys
-curl -o /etc/ssh/.ssh/authorized_keys "https://raw.githubusercontent.com/Kirara17233/config/main/.ssh/authorized_keys"
-ln -s /etc/ssh/.ssh /etc/skel/.ssh
+curl -o /etc/ssh/authorized_keys "$gitrep/.ssh/authorized_keys"
+ln -s /etc/ssh/authorized_keys /etc/skel/.ssh/authorized_keys
 
 git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /etc/oh-my-zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /etc/oh-my-zsh/custom/themes/powerlevel10k
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git /etc/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git /etc/oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone --depth=1 https://gitlab.com/Kirara17233/config.git /root/config
-cp /root/config/.p10k.zsh /etc/oh-my-zsh/.p10k.zsh
-cp /root/config/.zshrc /etc/oh-my-zsh/.zshrc
+curl -o /etc/oh-my-zsh/.p10k.zsh "$gitrep/.p10k.zsh"
+curl -o /etc/oh-my-zsh/.zshrc "$gitrep/.zshrc"
 ln -s /etc/oh-my-zsh/.zshrc /etc/skel/.zshrc
 ln -s /etc/oh-my-zsh/.zshrc /root/.zshrc
 
 mkdir /etc/xmonad
-cp /root/config/xmonad.hs /etc/xmonad/xmonad.hs
+curl -o /etc/xmonad/xmonad.hs "$gitrep/xmonad.hs"
 mkdir /etc/skel/.xmonad
 ln -s /etc/xmonad/xmonad.hs /etc/skel/.xmonad/xmonad.hs
-
-rm -rf /root/rsa
-rm -rf /root/config
 
 # 设置Locale
 sed -i "s|#en_US.UTF-8 UTF-8|en_US.UTF-8 UTF-8|g" /etc/locale.gen
