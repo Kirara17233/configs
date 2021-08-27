@@ -17,34 +17,34 @@ import XMonad.Hooks.SetWMName
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-main = xmonad defaults
+main = xmonad =<< statusBar "xmobar" xmobarPP {
+    ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"
+} toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b) def {
+-- simple stuff
+  terminal           = "termonad",
+  focusFollowsMouse  = False,
+  clickJustFocuses   = True,
+  borderWidth        = 1,
+  modMask            = mod4Mask,
+  workspaces         = ["1","2","3","4","5","6","7","8","9"],
+  normalBorderColor  = "#5E5086",
+  focusedBorderColor = "#ffffff",
 
-defaults = def {
-  -- simple stuff
-    terminal           = "termonad",
-    focusFollowsMouse  = False,
-    clickJustFocuses   = True,
-    borderWidth        = 1,
-    modMask            = mod4Mask,
-    workspaces         = ["1","2","3","4","5","6","7","8","9"],
-    normalBorderColor  = "#5E5086",
-    focusedBorderColor = "#ffffff",
+-- key bindings
+  keys               = myKeys,
+  mouseBindings      = myMouseBindings,
 
-  -- key bindings
-    keys               = myKeys,
-    mouseBindings      = myMouseBindings,
-
-  -- hooks, layouts
-    layoutHook         = myLayout,
-    manageHook         = composeAll
-      [ className =? "MPlayer"        --> doFloat
-      , className =? "Gimp"           --> doFloat
-      , resource  =? "desktop_window" --> doIgnore
-      , resource  =? "kdesktop"       --> doIgnore ],
-    handleEventHook    = mempty,
-    logHook            = return (),
-    startupHook        = setWMName "LG3D"
-  }
+-- hooks, layouts
+  layoutHook         = myLayout,
+  manageHook         = composeAll
+    [ className =? "MPlayer"        --> doFloat
+    , className =? "Gimp"           --> doFloat
+    , resource  =? "desktop_window" --> doIgnore
+    , resource  =? "kdesktop"       --> doIgnore ],
+  handleEventHook    = mempty,
+  logHook            = return (),
+  startupHook        = setWMName "LG3D"
+}
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
