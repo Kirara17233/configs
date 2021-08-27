@@ -10,6 +10,7 @@
 import XMonad
 import Data.Monoid
 import System.Exit
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 
 import qualified XMonad.StackSet as W
@@ -157,7 +158,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
   -- you may also bind events to the mouse scroll wheel (button4 and button5)
   ]
 
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
