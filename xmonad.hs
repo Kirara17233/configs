@@ -46,6 +46,7 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
   startupHook        = do
                         spawnOnce "xsetroot -cursor_name left_ptr"
                         spawn "xargs xwallpaper --daemon --zoom < ~/a"
+                        spawnOnce "xmonad --restart"
 }
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
