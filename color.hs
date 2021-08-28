@@ -1,4 +1,4 @@
-module XMonad.Stack.Color (
+module Color (
   red,
  ) where
 
