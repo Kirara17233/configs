@@ -44,7 +44,7 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
   handleEventHook    = mempty,
   logHook            = return () >> setWMName "LG3D",
   startupHook        = do
-                        spawn "xargs xwallpaper --daemon --zoom < ~/a"
+                        spawn "xargs xwallpaper --daemon --zoom < /usr/share/wallpapers/xwallpaper.conf"
                         spawnOnce "xsetroot -cursor_name left_ptr; xmonad --restart"
 }
 
