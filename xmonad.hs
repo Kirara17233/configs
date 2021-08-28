@@ -46,7 +46,7 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
   logHook            = return () >> setWMName "LG3D",
   startupHook        = do
                         spawn "xargs xwallpaper --daemon --zoom < /usr/share/wallpapers/xwallpaper.conf"
-                        spawnOnce "xsetroot -cursor_name left_ptr; xmonad --restart"
+                        spawnOnce "xsetroot -cursor_name left_ptr; /usr/bin/numlockx on; xmonad --restart"
 }
 
 myLayout = spacingRaw False (Border 5 5 5 5) True (Border 3 3 3 3) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
