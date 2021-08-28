@@ -7,6 +7,7 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
+import Color
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -28,7 +29,7 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
   modMask            = mod4Mask,
   workspaces         = ["1","2","3","4","5","6","7","8","9"],
   normalBorderColor  = "#5E5086",
-  focusedBorderColor = "#ffffff",
+  focusedBorderColor = red,
 
 -- key bindings
   keys               = myKeys,
@@ -47,6 +48,20 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
                         spawn "xargs xwallpaper --daemon --zoom < /usr/share/wallpapers/xwallpaper.conf"
                         spawnOnce "xsetroot -cursor_name left_ptr; xmonad --restart"
 }
+
+myLayout = spacingRaw False (Border 3 3 3 3) True (Border 3 3 3 3) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
+  where
+    -- default tiling algorithm partitions the screen into two panes
+    tiled   = Tall nmaster delta ratio
+
+    -- The default number of windows in the master pane
+    nmaster = 1
+
+    -- Default proportion of screen occupied by master pane
+    ratio   = 1/2
+
+    -- Percent of screen to increment by when resizing panes
+    delta   = 3/100
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -161,20 +176,6 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
   -- you may also bind events to the mouse scroll wheel (button4 and button5)
   ]
-
-myLayout = spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
-  where
-    -- default tiling algorithm partitions the screen into two panes
-    tiled   = Tall nmaster delta ratio
-
-    -- The default number of windows in the master pane
-    nmaster = 1
-
-    -- Default proportion of screen occupied by master pane
-    ratio   = 1/2
-
-    -- Percent of screen to increment by when resizing panes
-    delta   = 3/100
 
 help :: String
 help = unlines ["The default modifier key is 'alt'. Default keybindings:",
