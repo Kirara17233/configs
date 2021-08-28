@@ -13,6 +13,8 @@ import System.Exit
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.Spacing
+import XMonad.Util.SpawnOnce
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -22,7 +24,7 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
   terminal           = "termonad",
   focusFollowsMouse  = False,
   clickJustFocuses   = True,
-  borderWidth        = 1,
+  borderWidth        = 2,
   modMask            = mod4Mask,
   workspaces         = ["1","2","3","4","5","6","7","8","9"],
   normalBorderColor  = "#5E5086",
@@ -41,7 +43,9 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
     , resource  =? "kdesktop"       --> doIgnore ],
   handleEventHook    = mempty,
   logHook            = return () >> setWMName "LG3D",
-  startupHook        = return ()
+  startupHook        = do
+                        spawnOnce "xsetroot -cursor_name left_ptr"
+                        spawn "xargs xwallpaper --daemon --zoom < ~/a"
 }
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -158,7 +162,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
   -- you may also bind events to the mouse scroll wheel (button4 and button5)
   ]
 
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
