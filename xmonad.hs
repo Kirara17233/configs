@@ -40,8 +40,8 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ],
   handleEventHook    = mempty,
-  logHook            = return (),
-  startupHook        = setWMName "LG3D"
+  logHook            = return () >> setWMName "LG3D",
+  startupHook        = return ()
 }
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
