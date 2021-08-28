@@ -49,7 +49,7 @@ main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942
                         spawnOnce "xsetroot -cursor_name left_ptr; xmonad --restart"
 }
 
-myLayout = spacingRaw False (Border 3 3 3 3) True (Border 3 3 3 3) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
+myLayout = spacingRaw False (Border 5 5 5 5) True (Border 3 3 3 3) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
