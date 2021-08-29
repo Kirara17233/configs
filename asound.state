@@ -249,8 +249,8 @@ state.AudioPCI {
 	control.20 {
 		iface MIXER
 		name 'Capture Volume'
-		value.0 0
-		value.1 0
+		value.0 15
+		value.1 15
 		comment {
 			access 'read write'
 			type INTEGER
@@ -258,8 +258,8 @@ state.AudioPCI {
 			range '0 - 15'
 			dbmin 0
 			dbmax 2250
-			dbvalue.0 0
-			dbvalue.1 0
+			dbvalue.0 2250
+			dbvalue.1 2250
 		}
 	}
 	control.21 {
@@ -305,8 +305,8 @@ state.AudioPCI {
 	control.25 {
 		iface PCM
 		name 'Playback Channel Map'
-		value.0 3
-		value.1 4
+		value.0 0
+		value.1 0
 		comment {
 			access read
 			type INTEGER
