@@ -113,6 +113,6 @@ source $ZSH/oh-my-zsh.sh
 printf '\n%.s' {1..100}
 alias s='neofetch'
 alias up='yay -Syyu'
-alias i='yay -S --noconfirm'
+alias i='yay -S'
 alias remove='yay -Rsn'
 alias t='bpytop'
