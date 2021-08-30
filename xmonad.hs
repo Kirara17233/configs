@@ -22,7 +22,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 el :: Int -> String -> Char
-el index s = last $ take index s
+el index colors = last $ take index colors
 
 hex :: Char -> String
 hex char = [intToDigit $ index `div` 16, intToDigit $ index `mod` 16] where
@@ -42,8 +42,8 @@ main = do
     borderWidth        = 2,
     modMask            = mod4Mask,
     workspaces         = ["1","2","3","4","5","6","7","8","9"],
-    normalBorderColor  = "#5E5086",
-    focusedBorderColor = color 1 colors,
+    normalBorderColor  = color 3 colors,
+    focusedBorderColor = color 2 colors,
 
   -- key bindings
     keys               = myKeys,
