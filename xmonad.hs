@@ -59,7 +59,7 @@ main = do
     handleEventHook    = mempty,
     logHook            = return () >> setWMName "LG3D",
     startupHook        = do
-                          spawn "xargs xwallpaper --daemon --zoom < /usr/share/wallpapers/xwallpaper.conf"
+                          spawn "xwallpaper --daemon --zoom /usr/share/wallpapers/main"
                           spawnOnce "xsetroot -cursor_name left_ptr; /usr/bin/numlockx on; xmonad --restart"
   }
 
