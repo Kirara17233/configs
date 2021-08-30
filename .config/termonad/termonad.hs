@@ -91,7 +91,7 @@ main = do
     , highlightFgColour = Set $ color 5 colors
     , highlightBgColour = Set $ color 6 colors
     -- Set the extended palette that has 2 Vecs of 8 Dracula palette colours
-    , palette = ExtendedPalette $ fromMaybe defaultStandardColours $ mkList8
+    , palette = ExtendedPalette (fromMaybe defaultStandardColours $ mkList8
         [ color 7 colors -- black.0
         , color 8 colors -- red.1
         , color 9 colors -- green.2
@@ -100,7 +100,7 @@ main = do
         , color 12 colors -- magenta.5
         , color 13 colors -- cyan.6
         , color 14 colors -- white.7
-        ] $ fromMaybe defaultStandardColours $ mkList8
+        ]) $ fromMaybe defaultStandardColours $ mkList8
         [ color 15 colors -- black.8
         , color 16 colors -- red.9
         , color 17 colors -- green.10
