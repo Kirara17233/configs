@@ -7,10 +7,11 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
-import Color
 import XMonad
+import Data.Char
 import Data.Monoid
 import System.Exit
+import System.IO
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
@@ -20,34 +21,47 @@ import XMonad.Util.SpawnOnce
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-main = xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" } toggleStrutsKey def {
--- simple stuff
-  terminal           = "termonad",
-  focusFollowsMouse  = False,
-  clickJustFocuses   = True,
-  borderWidth        = 2,
-  modMask            = mod4Mask,
-  workspaces         = ["1","2","3","4","5","6","7","8","9"],
-  normalBorderColor  = "#5E5086",
-  focusedBorderColor = red,
+el :: Int -> String -> Char
+el index s = last $ take index s
 
--- key bindings
-  keys               = myKeys,
-  mouseBindings      = myMouseBindings,
+hex :: Char -> String
+hex char = [intToDigit $ index `div` 16, intToDigit $ index `mod` 16] where
+  index = ord char
 
--- hooks, layouts
-  layoutHook         = myLayout,
-  manageHook         = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ],
-  handleEventHook    = mempty,
-  logHook            = return () >> setWMName "LG3D",
-  startupHook        = do
-                        spawn "xargs xwallpaper --daemon --zoom < /usr/share/wallpapers/xwallpaper.conf"
-                        spawnOnce "xsetroot -cursor_name left_ptr; /usr/bin/numlockx on; xmonad --restart"
-}
+color :: Int -> String -> String
+color index colors = "#" ++ (hex $ el (index * 3 - 2) colors) ++ (hex $ el (index * 3 - 1) colors) ++ (hex $ el (index * 3) colors)
+
+main = do
+  hIn <- openBinaryFile "/etc/colors/main" ReadMode
+  colors <- hGetLine hIn
+  xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" } toggleStrutsKey def {
+  -- simple stuff
+    terminal           = "termonad",
+    focusFollowsMouse  = False,
+    clickJustFocuses   = True,
+    borderWidth        = 2,
+    modMask            = mod4Mask,
+    workspaces         = ["1","2","3","4","5","6","7","8","9"],
+    normalBorderColor  = "#5E5086",
+    focusedBorderColor = color 1 colors,
+
+  -- key bindings
+    keys               = myKeys,
+    mouseBindings      = myMouseBindings,
+
+  -- hooks, layouts
+    layoutHook         = myLayout,
+    manageHook         = composeAll
+      [ className =? "MPlayer"        --> doFloat
+      , className =? "Gimp"           --> doFloat
+      , resource  =? "desktop_window" --> doIgnore
+      , resource  =? "kdesktop"       --> doIgnore ],
+    handleEventHook    = mempty,
+    logHook            = return () >> setWMName "LG3D",
+    startupHook        = do
+                          spawn "xargs xwallpaper --daemon --zoom < /usr/share/wallpapers/xwallpaper.conf"
+                          spawnOnce "xsetroot -cursor_name left_ptr; /usr/bin/numlockx on; xmonad --restart"
+  }
 
 myLayout = spacingRaw False (Border 5 5 5 5) True (Border 3 3 3 3) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
   where
