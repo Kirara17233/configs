@@ -15,6 +15,7 @@ import System.IO
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.Reflect
 import XMonad.Layout.Spacing
 import XMonad.Util.SpawnOnce
 
@@ -50,7 +51,7 @@ main = do
     mouseBindings      = myMouseBindings,
 
   -- hooks, layouts
-    layoutHook         = myLayout,
+    layoutHook         = spacingRaw False (Border 5 5 5 5) True (Border 3 3 3 3) True $ avoidStruts $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full,
     manageHook         = composeAll
       [ className =? "MPlayer"        --> doFloat
       , className =? "Gimp"           --> doFloat
@@ -62,20 +63,6 @@ main = do
                           spawn "xwallpaper --daemon --zoom /usr/share/wallpapers/main"
                           spawnOnce "xsetroot -cursor_name left_ptr; /usr/bin/numlockx on; xmonad --restart"
   }
-
-myLayout = spacingRaw False (Border 5 5 5 5) True (Border 3 3 3 3) True $ avoidStruts $ tiled ||| Mirror tiled ||| Full
-  where
-    -- default tiling algorithm partitions the screen into two panes
-    tiled   = Tall nmaster delta ratio
-
-    -- The default number of windows in the master pane
-    nmaster = 1
-
-    -- Default proportion of screen occupied by master pane
-    ratio   = 1/2
-
-    -- Percent of screen to increment by when resizing panes
-    delta   = 3/100
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
