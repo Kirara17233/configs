@@ -112,8 +112,7 @@ source $ZSH/oh-my-zsh.sh
 
 printf '\n%.s' {1..100}
 alias s='neofetch'
-alias up='yay -Syyu'
-alias i='yay -Syy'
+alias y='yay -Syyu'
 alias remove='yay -Rsn'
 alias t='bpytop'
 alias p='bash-pipes -t'
