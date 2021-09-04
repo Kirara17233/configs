@@ -37,7 +37,7 @@ main = do
   colors <- hGetLine hIn
   xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" } toggleStrutsKey def {
   -- simple stuff
-    terminal           = "alacritty",
+    terminal           = "termonad",
     focusFollowsMouse  = False,
     clickJustFocuses   = True,
     borderWidth        = 2,
