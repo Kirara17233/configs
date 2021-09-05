@@ -79,7 +79,7 @@ myTMConfig =
 
 main :: IO ()
 main = do
-  hIn <- openBinaryFile "/etc/colors/main" ReadMode
+  hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
   colors <- hGetLine hIn
   -- First, create the colour extension based on either PaperColor modules.
   myColourExt <- createColourExtension (defaultColourConfig
