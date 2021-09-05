@@ -60,7 +60,7 @@ main = do
     handleEventHook    = mempty,
     logHook            = return () >> setWMName "LG3D",
     startupHook        = do
-                          spawn "xwallpaper --daemon --zoom /usr/share/wallpapers/main"
+                          spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/main"
                           spawnOnce "/usr/bin/numlockx on"
                           spawnOnce "xsetroot -cursor_name left_ptr"
                           spawnOnce "picom"
