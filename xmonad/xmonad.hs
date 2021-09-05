@@ -62,8 +62,8 @@ main = do
     startupHook        = do
                           spawn "xwallpaper --daemon --zoom /usr/share/wallpapers/main"
                           spawnOnce "/usr/bin/numlockx on"
-                          spawnOnce "picom"
                           spawnOnce "xsetroot -cursor_name left_ptr"
+                          spawnOnce "picom"
                           spawnOnce "xmonad --restart"
   }
 
