@@ -13,10 +13,12 @@ import Data.Monoid
 import System.Exit
 import System.IO
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.Reflect
 import XMonad.Layout.Spacing
+import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
 import qualified XMonad.StackSet as W
@@ -35,38 +37,43 @@ color index colors = "#" ++ (hex $ el (index * 3 - 2) colors) ++ (hex $ el (inde
 main = do
   hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
   colors <- hGetLine hIn
-  xmonad =<< statusBar "xmobar" xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" } toggleStrutsKey def {
-  -- simple stuff
-    terminal           = "termonad",
-    focusFollowsMouse  = False,
-    clickJustFocuses   = True,
-    borderWidth        = 2,
-    modMask            = mod4Mask,
-    workspaces         = ["1","2","3","4","5","6","7","8","9"],
-    normalBorderColor  = color 3 colors,
-    focusedBorderColor = color 2 colors,
+  xmonad =<< statusBar "xfce4-panel" myPP toggleStrutsKey (ewmh def {
+    -- simple stuff
+      terminal           = "termonad",
+      focusFollowsMouse  = False,
+      clickJustFocuses   = True,
+      borderWidth        = 2,
+      modMask            = mod4Mask,
+      workspaces         = ["1","2","3","4","5","6","7","8","9"],
+      normalBorderColor  = color 3 colors,
+      focusedBorderColor = color 2 colors,
+ 
+    -- key bindings
+      keys               = myKeys,
+      mouseBindings      = myMouseBindings,
 
-  -- key bindings
-    keys               = myKeys,
-    mouseBindings      = myMouseBindings,
+    -- hooks, layouts
+      layoutHook         = spacingRaw False (Border 5 5 5 5) True (Border 3 3 3 3) True $ avoidStruts $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full,
+      manageHook         = composeAll
+        [ className =? "MPlayer"        --> doFloat
+        , className =? "Gimp"           --> doFloat
+        , resource  =? "desktop_window" --> doIgnore
+        , resource  =? "kdesktop"       --> doIgnore ],
+      handleEventHook    = fullscreenEventHook,
+      logHook            = return () >> setWMName "LG3D",
+      startupHook        = do
+                            spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/main"
+                            spawnOnce "/usr/bin/numlockx on"
+                            spawnOnce "xsetroot -cursor_name left_ptr"
+                            spawnOnce "picom"
+                            spawnOnce "xmonad --restart"
+    })
 
-  -- hooks, layouts
-    layoutHook         = spacingRaw False (Border 5 5 5 5) True (Border 3 3 3 3) True $ avoidStruts $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full,
-    manageHook         = composeAll
-      [ className =? "MPlayer"        --> doFloat
-      , className =? "Gimp"           --> doFloat
-      , resource  =? "desktop_window" --> doIgnore
-      , resource  =? "kdesktop"       --> doIgnore ],
-    handleEventHook    = mempty,
-    logHook            = return () >> setWMName "LG3D",
-    startupHook        = do
-                          spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/main"
-                          spawnOnce "/usr/bin/numlockx on"
-                          spawnOnce "xsetroot -cursor_name left_ptr"
-                          spawnOnce "picom"
-                          spawnOnce "xfce4-panel"
-                          spawnOnce "xmonad --restart"
-  }
+-- Custom PP, configure it as you like. It determines what is being written to the bar.
+myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
+
+-- Key binding to toggle the gap for the bar.
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -160,8 +167,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
