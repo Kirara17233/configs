@@ -64,6 +64,7 @@ main = do
                           spawnOnce "/usr/bin/numlockx on"
                           spawnOnce "xsetroot -cursor_name left_ptr"
                           spawnOnce "picom"
+                          spawnOnce "xfce4-panel"
                           spawnOnce "xmonad --restart"
   }
 
