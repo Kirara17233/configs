@@ -61,7 +61,10 @@ main = do
     logHook            = return () >> setWMName "LG3D",
     startupHook        = do
                           spawn "xwallpaper --daemon --zoom /usr/share/wallpapers/main"
-                          spawnOnce "xsetroot -cursor_name left_ptr; /usr/bin/numlockx on; xmonad --restart"
+                          spawnOnce "/usr/bin/numlockx on"
+                          spawnOnce "picom"
+                          spawnOnce "xsetroot -cursor_name left_ptr"
+                          spawnOnce "xmonad --restart"
   }
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
