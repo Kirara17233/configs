@@ -56,7 +56,7 @@ main = do
                             spawnOnce "picom"
                             spawn "random-wallpaper; xwallpaper --daemon --zoom /etc/config/wallpapers/main"
                             spawnOnce "xsetroot -cursor_name left_ptr"
-                            spawnOnce "xfce4-panel"
+                            spawnOnce "xfce4-panel; jetbrains-toolbox --minimize"
                             spawnOnce "xmonad --restart"
     })
 
@@ -73,6 +73,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
   -- launch rofi
   , ((modm,               xK_p     ), spawn "rofi -show run")
+
+  , ((modm,               xK_x     ), spawn "jetbrains-toolbox")
+  , ((modm,               xK_c     ), spawn "code")
 
   -- close focused window
   , ((modm .|. shiftMask, xK_c     ), kill)
