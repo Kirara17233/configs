@@ -62,7 +62,7 @@ main = do
       handleEventHook    = fullscreenEventHook,
       logHook            = return () >> setWMName "LG3D",
       startupHook        = do
-                            spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/main"
+                            spawn "random-wallpaper; xwallpaper --daemon --zoom /etc/config/wallpapers/main"
                             spawnOnce "/usr/bin/numlockx on"
                             spawnOnce "xsetroot -cursor_name left_ptr"
                             spawnOnce "picom"
