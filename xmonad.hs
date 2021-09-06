@@ -74,9 +74,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- launch rofi
   , ((modm,               xK_p     ), spawn "rofi -show run")
 
-  -- launch gmrun
-  , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
-
   -- close focused window
   , ((modm .|. shiftMask, xK_c     ), kill)
 
@@ -110,11 +107,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- Swap the focused window with the previous window
   , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
-  -- Shrink the master area
-  , ((modm,               xK_h     ), sendMessage Shrink)
-
   -- Expand the master area
-  , ((modm,               xK_l     ), sendMessage Expand)
+  , ((modm,               xK_h     ), sendMessage Expand)
+
+  -- Shrink the master area
+  , ((modm,               xK_l     ), sendMessage Shrink)
 
   -- Push window back into tiling
   , ((modm,               xK_t     ), withFocused $ windows . W.sink)
