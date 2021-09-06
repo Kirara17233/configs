@@ -1,12 +1,3 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
-
 import XMonad
 import Data.Char
 import Data.Monoid
@@ -28,8 +19,7 @@ el :: Int -> String -> Char
 el index colors = last $ take index colors
 
 hex :: Char -> String
-hex char = [intToDigit $ index `div` 16, intToDigit $ index `mod` 16] where
-  index = ord char
+hex char = [intToDigit $ index `div` 16, intToDigit $ index `mod` 16] where index = ord char
 
 color :: Int -> String -> String
 color index colors = "#" ++ (hex $ el (index * 3 - 2) colors) ++ (hex $ el (index * 3 - 1) colors) ++ (hex $ el (index * 3) colors)
@@ -37,7 +27,7 @@ color index colors = "#" ++ (hex $ el (index * 3 - 2) colors) ++ (hex $ el (inde
 main = do
   hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
   colors <- hGetLine hIn
-  xmonad =<< statusBar "xfce4-panel" myPP toggleStrutsKey (ewmh def {
+  xmonad =<< statusBar "xmobar" myPP toggleStrutsKey (ewmh def {
     -- simple stuff
       terminal           = "termonad",
       focusFollowsMouse  = False,
@@ -62,10 +52,11 @@ main = do
       handleEventHook    = fullscreenEventHook,
       logHook            = return () >> setWMName "LG3D",
       startupHook        = do
-                            spawn "random-wallpaper; xwallpaper --daemon --zoom /etc/config/wallpapers/main"
                             spawnOnce "/usr/bin/numlockx on"
-                            spawnOnce "xsetroot -cursor_name left_ptr"
                             spawnOnce "picom"
+                            spawn "random-wallpaper; xwallpaper --daemon --zoom /etc/config/wallpapers/main"
+                            spawnOnce "xsetroot -cursor_name left_ptr"
+                            spawnOnce "xfce4-panel"
                             spawnOnce "xmonad --restart"
     })
 
