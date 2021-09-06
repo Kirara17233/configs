@@ -1,3 +1,0 @@
-#!/usr/bin/zsh
-
-sudo ln -sf /etc/config/wallpapers/$1.jpg /etc/config/wallpapers/main

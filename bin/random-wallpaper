@@ -1,3 +1,0 @@
-#!/usr/bin/zsh
-
-wallpaper $[$RANDOM%`ls -l /etc/config/wallpapers | grep "^-" | wc -l`]
