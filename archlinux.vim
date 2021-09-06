@@ -6,7 +6,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-nmap <silent> q :q! <cr>
+nmap <silent> q :q <cr>
 
 let g:airline_powerline_fonts = 1
 \"let g:airline_theme='deus'
