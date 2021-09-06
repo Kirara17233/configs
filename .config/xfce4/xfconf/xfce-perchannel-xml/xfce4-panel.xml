@@ -57,7 +57,14 @@
         <value type="string" value="toolbox"/>
       </property>
     </property>
-    <property name="plugin-3" type="string" value="clock"/>
+    <property name="plugin-3" type="string" value="clock">
+      <property name="tooltip-format" type="string" value="%A %d/%m/%Y"/>
+      <property name="digital-format" type="string" value="%a %_d %B %R"/>
+      <property name="mode" type="uint" value="4"/>
+      <property name="flash-separators" type="bool" value="true"/>
+      <property name="show-seconds" type="bool" value="false"/>
+      <property name="show-meridiem" type="bool" value="false"/>
+    </property>
     <property name="plugin-4" type="string" value="separator"/>
     <property name="plugin-5" type="string" value="actions"/>
   </property>
