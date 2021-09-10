@@ -1,7 +1,5 @@
 import Xmobar
 
--- Example user-defined plugin
-
 data HelloWorld = HelloWorld
     deriving (Read, Show)
 
