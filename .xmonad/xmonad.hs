@@ -27,7 +27,7 @@ color index colors = "#" ++ (hex $ el (index * 3 - 2) colors) ++ (hex $ el (inde
 main = do
   hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
   colors <- hGetLine hIn
-  xmonad =<< statusBar "xmobar" myPP toggleStrutsKey (ewmh def {
+  xmonad =<< statusBar "xmobar ~/.xmobar/xmobar.hs" myPP toggleStrutsKey (ewmh def {
     -- simple stuff
       terminal           = "termonad",
       focusFollowsMouse  = False,
