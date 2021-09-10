@@ -75,7 +75,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- launch rofi
   , ((modm,               xK_p     ), spawn "rofi -show run")
 
-  , ((modm,               xK_x     ), spawn "jetbrains-toolbox; sleep 0.1; wmctrl -r 'Jetbrains toolbox' -e 0,20,$[`xrandr | grep current | awk '{print $10}' | cut -d , -f 1`-704],-1,-1")
+  , ((modm,               xK_x     ), spawn "jetbrains-toolbox; sleep 0.1; wmctrl -r 'Jetbrains toolbox' -e 0,22,$[`xrandr | grep current | awk '{print $10}' | cut -d , -f 1`-704],-1,-1")
   , ((modm,               xK_c     ), spawn "code")
 
   -- close focused window
