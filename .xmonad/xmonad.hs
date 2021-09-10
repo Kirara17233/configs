@@ -75,8 +75,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   -- launch rofi
   , ((modm,               xK_p     ), spawn "rofi -show run")
 
-  , ((modm,               xK_x     ), spawn "jetbrains-toolbox")
-  , ((modm,               xK_c     ), spawn "code")
+  , ((modm .|. shiftMask, xK_x     ), spawn "jetbrains-toolbox")
+  , ((modm .|. shiftMask, xK_c     ), spawn "code")
 
   -- close focused window
   , ((modm .|. shiftMask, xK_c     ), kill)
