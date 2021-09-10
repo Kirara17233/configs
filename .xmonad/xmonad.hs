@@ -56,7 +56,8 @@ main = do
                             spawnOnce "picom"
                             spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/$[$RANDOM%$(ls -l /etc/config/wallpapers | grep \"^-\" | wc -l)].jpg"
                             spawnOnce "xsetroot -cursor_name left_ptr"
-                            spawnOnce "xfce4-panel; jetbrains-toolbox --minimize"
+                            spawnOnce "xfce4-panel"
+                            spawnOnce "jetbrains-toolbox --minimize"
                             spawnOnce "xmonad --restart"
     })
 
