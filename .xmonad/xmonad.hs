@@ -54,7 +54,7 @@ main = do
       startupHook        = do
                             spawnOnce "/usr/bin/numlockx on"
                             spawnOnce "picom"
-                            spawn "pkill xwallpaper; xwallpaper --daemon --zoom /etc/config/wallpapers/$[$RANDOM%`ls -l /etc/config/wallpapers | grep \"^-\" | wc -l`].jpg"
+                            spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/$[$RANDOM%`ls -l /etc/config/wallpapers | grep \"^-\" | wc -l`].jpg"
                             spawnOnce "xsetroot -cursor_name left_ptr"
                             spawnOnce "xfce4-panel"
                             spawnOnce "jetbrains-toolbox --minimize"
@@ -136,7 +136,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
   -- Restart xmonad
-  , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+  , ((modm              , xK_q     ), spawn "pkill xwallpaper; xmonad --recompile; xmonad --restart")
 
   -- Run xmessage with a summary of the default keybindings (useful for beginners)
   , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
