@@ -43,7 +43,7 @@ main = do
       mouseBindings      = myMouseBindings,
 
     -- hooks, layouts
-      layoutHook         = avoidStruts $ spacingRaw False (Border 4 5 10 12) True (Border 2 2 6 8) True $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full,
+      layoutHook         = avoidStruts $ spacingRaw False (Border 5 5 15 15) True (Border 2 2 8 8) True $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full,
       manageHook         = composeAll
         [ className =? "MPlayer"        --> doFloat
         , className =? "Gimp"           --> doFloat
