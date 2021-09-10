@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+
+sudo curl -o /etc/ssh/id_rsa https://raw.githubusercontent.com/Kirara17233/rsa/main/id_rsa\?token=$1
