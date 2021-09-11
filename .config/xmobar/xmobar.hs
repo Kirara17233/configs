@@ -1,34 +1,18 @@
 import Xmobar
 
-data HelloWorld = HelloWorld
-    deriving (Read, Show)
-
-instance Exec HelloWorld where
-    alias HelloWorld = "hw"
-    run   HelloWorld = return "<fc=red>Hello World!!</fc>"
-
--- Configuration, using predefined monitors as well as our HelloWorld
--- plugin:
-
 main :: IO ()
 main = xmobar defaultConfig {
   font = "xft:MesloLGS NF:style=Regular:pixelsize=10"
   , additionalFonts = []
-  , borderColor = "black"
-  , border = TopB
   , bgColor = "black"
   , fgColor = "grey"
-  , alpha = 255
   , position = TopSize L 50 21
-  , textOffset = -1
-  , iconOffset = -1
   , lowerOnStart = True
   , pickBroadest = False
-  , persistent = False
+  , persistent = True
   , hideOnStart = False
-  , iconRoot = "."
+  , iconRoot = "/etc/config/icons"
   , allDesktops = True
-  , overrideRedirect = True
   , commands = [ Run $ Weather "EGPH" ["-t","<station>: <tempC>C",
                                         "-L","18","-H","25",
                                         "--normal","green",
@@ -44,10 +28,8 @@ main = xmobar defaultConfig {
                , Run $ Swap [] 10
                , Run $ Com "uname" ["-s","-r"] "" 36000
                , Run $ Date "%a %b %_d %Y %H:%M:%S" "date" 10
-              , Run HelloWorld
               ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
-               \ %hw% { <fc=#ee9a00>%date%</fc>| %EGPH% | %uname%"
+  , template = "<icon=Arch.xpm/>"
 }
