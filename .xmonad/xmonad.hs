@@ -50,13 +50,13 @@ main = do
     , handleEventHook    = fullscreenEventHook
     , logHook            = return () >> setWMName "LG3D"
     , startupHook        = do
-                            spawnOnce "/usr/bin/numlockx on"
-                            spawnOnce "picom"
-                            spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/$[$RANDOM%`ls -l /etc/config/wallpapers | grep '^-' | wc -l`].jpg"
-                            spawnOnce "xsetroot -cursor_name left_ptr"
-                            spawnOnce "xfce4-panel"
-                            spawnOnce "jetbrains-toolbox --minimize"
-                            spawnOnce "xmonad --restart" })
+        spawnOnce "/usr/bin/numlockx on"
+        spawnOnce "picom"
+        spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/$[$RANDOM%`ls -l /etc/config/wallpapers | grep '^-' | wc -l`].jpg"
+        spawnOnce "xsetroot -cursor_name left_ptr"
+        spawnOnce "xfce4-panel"
+        spawnOnce "jetbrains-toolbox --minimize"
+        spawnOnce "xmonad --restart" })
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
