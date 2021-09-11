@@ -10,16 +10,16 @@ instance Exec HelloWorld where
 -- Configuration, using predefined monitors as well as our HelloWorld
 -- plugin:
 
-config :: Config
-config = defaultConfig {
-  font = "xft:Sans Mono-9"
+main :: IO ()
+main = xmobar defaultConfig {
+  font = "xft:MesloLGS NF:style=Regular:pixelsize=10"
   , additionalFonts = []
   , borderColor = "black"
   , border = TopB
   , bgColor = "black"
   , fgColor = "grey"
   , alpha = 255
-  , position = Top
+  , position = TopSize L 50 21
   , textOffset = -1
   , iconOffset = -1
   , lowerOnStart = True
@@ -51,6 +51,3 @@ config = defaultConfig {
   , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
                \ %hw% { <fc=#ee9a00>%date%</fc>| %EGPH% | %uname%"
 }
-
-main :: IO ()
-main = xmobar config

@@ -24,6 +24,7 @@ hex char = [intToDigit $ index `div` 16, intToDigit $ index `mod` 16] where inde
 color :: Int -> String -> String
 color index colors = "#" ++ (hex $ el (index * 3 - 2) colors) ++ (hex $ el (index * 3 - 1) colors) ++ (hex $ el (index * 3) colors)
 
+main :: IO ()
 main = do
   hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
   colors <- hGetLine hIn
