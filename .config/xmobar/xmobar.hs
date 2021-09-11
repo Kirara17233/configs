@@ -11,7 +11,7 @@ main = xmobar defaultConfig {
   , pickBroadest = False
   , persistent = True
   , hideOnStart = False
-  , iconRoot = "/etc/config/icons"
+  , iconRoot = "/etc/config/icons/"
   , allDesktops = True
   , commands = [ Run $ Weather "EGPH" ["-t","<station>: <tempC>C",
                                         "-L","18","-H","25",

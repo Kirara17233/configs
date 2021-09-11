@@ -28,39 +28,35 @@ main :: IO ()
 main = do
   hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
   colors <- hGetLine hIn
-  xmonad =<< statusBar "xmobar ~/.config/xmobar/xmobar.hs" myPP toggleStrutsKey (ewmh def {
-    -- simple stuff
-      terminal           = "termonad",
-      focusFollowsMouse  = False,
-      clickJustFocuses   = True,
-      borderWidth        = 2,
-      modMask            = mod4Mask,
-      workspaces         = ["1","2","3","4","5","6","7","8","9"],
-      normalBorderColor  = color 3 colors,
-      focusedBorderColor = color 2 colors,
+  xmonad =<< statusBar "xmobar ~/.config/xmobar/xmobar.hs" myPP toggleStrutsKey (ewmh def
+    { terminal           = "termonad"
+    , focusFollowsMouse  = False
+    , clickJustFocuses   = True
+    , borderWidth        = 2
+    , modMask            = mod4Mask
+    , workspaces         = ["1","2","3","4","5","6","7","8","9"]
+    , normalBorderColor  = color 3 colors
+    , focusedBorderColor = color 2 colors
  
-    -- key bindings
-      keys               = myKeys,
-      mouseBindings      = myMouseBindings,
+    , keys               = myKeys
+    , mouseBindings      = myMouseBindings
 
-    -- hooks, layouts
-      layoutHook         = avoidStruts $ spacingRaw False (Border 5 5 15 15) True (Border 2 2 8 8) True $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full,
-      manageHook         = composeAll
+    , layoutHook         = avoidStruts $ spacingRaw False (Border 5 5 15 15) True (Border 2 2 8 8) True $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full
+    , manageHook         = composeAll
         [ className =? "MPlayer"        --> doFloat
         , className =? "Gimp"           --> doFloat
         , resource  =? "desktop_window" --> doIgnore
-        , resource  =? "kdesktop"       --> doIgnore ],
-      handleEventHook    = fullscreenEventHook,
-      logHook            = return () >> setWMName "LG3D",
-      startupHook        = do
+        , resource  =? "kdesktop"       --> doIgnore ]
+    , handleEventHook    = fullscreenEventHook
+    , logHook            = return () >> setWMName "LG3D"
+    , startupHook        = do
                             spawnOnce "/usr/bin/numlockx on"
                             spawnOnce "picom"
                             spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/$[$RANDOM%`ls -l /etc/config/wallpapers | grep '^-' | wc -l`].jpg"
                             spawnOnce "xsetroot -cursor_name left_ptr"
                             spawnOnce "xfce4-panel"
                             spawnOnce "jetbrains-toolbox --minimize"
-                            spawnOnce "xmonad --restart"
-    })
+                            spawnOnce "xmonad --restart" })
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
