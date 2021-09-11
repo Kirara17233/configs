@@ -74,6 +74,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
   , ((modm,               xK_x     ), spawn "jetbrains-toolbox; sleep 0.05; wmctrl -r 'Jetbrains toolbox' -e 0,22,$[`xrandr | grep current | awk '{print $10}' | cut -d , -f 1`-704],440,700")
   , ((modm,               xK_c     ), spawn "code")
+  , ((modm,               xK_g     ), spawn "google-chrome-stable")
+  , ((modm,               xK_e     ), spawn "Emacs-GUI")
 
   -- close focused window
   , ((modm .|. shiftMask, xK_c     ), kill)
