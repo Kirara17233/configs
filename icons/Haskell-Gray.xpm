@@ -1,0 +1,30 @@
+/* XPM */
+static char *Haskell_Gray[] = {
+/* columns rows colors chars-per-pixel */
+"28 20 4 1 ",
+"  c None",
+". c #656565",
+"X c #666666",
+"o c #999999",
+/* pixels */
+"XXXXX  ooooo                ",
+" XXXXX  ooooo               ",
+"  XXXXX ooooo               ",
+"  XXXXX  ooooo              ",
+"   XXXXX  oooo              ",
+"    XXXXX ooooo             ",
+"    XXXXX  ooooo  XXXXXXXXXX",
+"     XXXXX  oooo  XXXXXXXXXX",
+"      XXXXX ooooo  XXXXXXXXX",
+"      XXXXX  ooooo          ",
+"      XXXXX  ooooo          ",
+"      XXXXX ooooooo  XXXXXXX",
+"     XXXXX  oooooooo XXXXXXX",
+"    XXXXX  ooooooooo  XXXXXX",
+"    XXXXX ooooo ooooo       ",
+"   XXXXX  oooo   ooooo      ",
+"  XXXXX  ooooo   ooooo      ",
+"  XXXXX ooooo     ooooo     ",
+" XXXXX  ooooo      ooooo    ",
+"XXXXX  ooooo       ooooo    "
+};

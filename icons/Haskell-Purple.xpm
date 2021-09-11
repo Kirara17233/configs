@@ -1,0 +1,30 @@
+/* XPM */
+static char *Haskell_Purple[] = {
+/* columns rows colors chars-per-pixel */
+"28 20 4 1 ",
+"  c None",
+". c #453A62",
+"X c #5E5086",
+"o c #8F4E8B",
+/* pixels */
+".....  XXXXX                ",
+" .....  XXXXX               ",
+"  ..... XXXXX               ",
+"  .....  XXXXX              ",
+"   .....  XXXX              ",
+"    ..... XXXXX             ",
+"    .....  XXXXX  oooooooooo",
+"     .....  XXXX  oooooooooo",
+"      ..... XXXXX  ooooooooo",
+"      .....  XXXXX          ",
+"      .....  XXXXX          ",
+"      ..... XXXXXXX  ooooooo",
+"     .....  XXXXXXXX ooooooo",
+"    .....  XXXXXXXXX  oooooo",
+"    ..... XXXXX XXXXX       ",
+"   .....  XXXX   XXXXX      ",
+"  .....  XXXXX   XXXXX      ",
+"  ..... XXXXX     XXXXX     ",
+" .....  XXXXX      XXXXX    ",
+".....  XXXXX       XXXXX    "
+};

@@ -28,7 +28,7 @@ main :: IO ()
 main = do
   hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
   colors <- hGetLine hIn
-  xmonad =<< statusBar "xmobar" myPP toggleStrutsKey (ewmh def
+  xmonad =<< statusBar "ghc --make .config/xmobar/xmobar.hs -dynamic -threaded && xmobar" myPP toggleStrutsKey (ewmh def
     { terminal           = "termonad"
     , focusFollowsMouse  = False
     , clickJustFocuses   = True
