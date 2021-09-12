@@ -15,6 +15,15 @@ import XMonad.Util.SpawnOnce
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+el :: Int -> String -> Char
+el index colors = last $ take index colors
+
+hex :: Char -> String
+hex char = [intToDigit $ index `div` 16, intToDigit $ index `mod` 16] where index = ord char
+
+color :: Int -> String -> String
+color index colors = "#" ++ (hex $ el (index * 3 - 2) colors) ++ (hex $ el (index * 3 - 1) colors) ++ (hex $ el (index * 3) colors)
+
 main :: IO ()
 main = do
     hIn <- openBinaryFile "/etc/config/colors/main" ReadMode
@@ -26,8 +35,8 @@ main = do
         , borderWidth        = 2
         , modMask            = mod4Mask
         , workspaces         = ["1","2","3","4","5","6","7","8","9"]
-        , normalBorderColor  = "#000000"
-        , focusedBorderColor = "#000000"
+        , normalBorderColor  = color 3 colors
+        , focusedBorderColor = color 2 colors
 
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
