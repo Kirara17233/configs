@@ -51,7 +51,7 @@ main = do
         , logHook            = return () >> setWMName "LG3D"
         , startupHook        = do
             spawnOnce "/usr/bin/numlockx on"
-            spawnOnce "picom"
+            spawnOnce "picom --experimental-backends"
             spawn "xwallpaper --daemon --zoom /etc/config/wallpapers/$[$RANDOM%`ls -l /etc/config/wallpapers | grep '^-' | wc -l`].jpg"
             spawnOnce "xsetroot -cursor_name left_ptr"
             spawnOnce "xfce4-panel"
