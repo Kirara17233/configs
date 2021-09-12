@@ -28,6 +28,6 @@ main = xmobar defaultConfig
       , Run $ UnsafeStdinReader ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = " <icon=Haskell-White.xpm/> "
+  , template = "<icon=Haskell-White.xpm/>"
 }
 
