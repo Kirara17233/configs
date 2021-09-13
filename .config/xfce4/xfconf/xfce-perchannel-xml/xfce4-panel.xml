@@ -42,7 +42,7 @@
     </property>
     <property name="plugin-2" type="string" value="appmenu">
       <property name="plugins" type="empty">
-        <property name="plugin-1" type="empty">
+        <property name="plugin-2" type="empty">
           <property name="bold-application-name" type="bool" value="true"/>
         </property>
       </property>
