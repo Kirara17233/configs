@@ -25,7 +25,7 @@ main = do
         , modMask            = mod4Mask
         , workspaces         = ["1","2","3","4","5","6","7","8","9"]
         , normalBorderColor  = "#0f111a"
-        , focusedBorderColor = "#8f93a2"
+        , focusedBorderColor = "#ffcc00"
 
         , keys               = myKeys
         , mouseBindings      = myMouseBindings

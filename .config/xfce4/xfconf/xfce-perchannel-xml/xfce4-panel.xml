@@ -13,9 +13,9 @@
       <property name="length" type="uint" value="50"/>
       <property name="background-style" type="uint" value="1"/>
       <property name="background-rgba" type="array">
-        <value type="double" value="0.058824"/>
-        <value type="double" value="0.066667"/>
-        <value type="double" value="0.101961"/>
+        <value type="double" value="0.000000"/>
+        <value type="double" value="0.000000"/>
+        <value type="double" value="0.000000"/>
         <value type="double" value="1.000000"/>
       </property>
       <property name="plugin-ids" type="array">
