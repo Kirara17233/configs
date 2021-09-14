@@ -25,10 +25,10 @@ color15 = "#ffffff"
 
 main :: IO ()
 main = xmobar defaultConfig
-  { font = "xft:MesloLGS NF:style=Regular:pixelsize=10"
+  { font = "xft:MesloLGS NF:style=Regular:pixelsize=13"
   , additionalFonts = []
-  , bgColor = "black"
-  , fgColor = "grey"
+  , bgColor = backgroundColor
+  , fgColor = foregroundColor
   , position = TopSize L 50 21
   , lowerOnStart = True
   , pickBroadest = False
@@ -51,6 +51,6 @@ main = xmobar defaultConfig
       , Run $ UnsafeStdinReader ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "<icon=Haskell-White.xpm/>"
+  , template = " <icon=Arch.xpm/> <fc=#ffffff>|</fc>"
 }
 
