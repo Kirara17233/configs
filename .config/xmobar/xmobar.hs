@@ -1,5 +1,28 @@
 import Xmobar
 
+cursorFgColor = "#0f111a"
+cursorBgColor = "#ffcc00"
+foregroundColor = "#8f93a2"
+backgroundColor = "#0f111a"
+highlightFgColor = "#8f93a2"
+highlightBgColor = "#1f2233"
+color0 = "#546e7a"
+color1 = "#ff5370"
+color2 = "#c3e88d"
+color3 = "#ffcb6b"
+color4 = "#82aaff"
+color5 = "#c792ea"
+color6 = "#89ddff"
+color7 = "#ffffff"
+color8 = "#546e7a"
+color9 = "#ff5370"
+color10 = "#c3e88d"
+color11 = "#ffcb6b"
+color12 = "#82aaff"
+color13 = "#c792ea"
+color14 = "#89ddff"
+color15 = "#ffffff"
+
 main :: IO ()
 main = xmobar defaultConfig
   { font = "xft:MesloLGS NF:style=Regular:pixelsize=10"
