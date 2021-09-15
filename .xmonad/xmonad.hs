@@ -15,6 +15,29 @@ import XMonad.Util.SpawnOnce
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+cursorFColor = "#0f111a"
+cursorBgColor = "#ffcc00"
+foregroundColor = "#8f93a2"
+backgroundColor = "#0f111a"
+highlightFgColor = "#8f93a2"
+highlightBgColor = "#1f2233"
+black = "#546e7a"
+red = "#ff5370"
+green = "#c3e88d"
+yellow = "#ffcb6b"
+blue = "#82aaff"
+purple = "#c792ea"
+cyan = "#89ddff"
+white = "#ffffff"
+lightBlack = "#546e7a"
+lightRed = "#ff5370"
+lightGreen = "#c3e88d"
+lightYellow = "#ffcb6b"
+lightBlue = "#82aaff"
+lightPurple = "#c792ea"
+lightCyan = "#89ddff"
+lightWhite = "#ffffff"
+
 main :: IO ()
 main = do
     xmonad =<< statusBar "ghc --make .config/xmobar/xmobar.hs -dynamic -threaded && xmobar" myPP toggleStrutsKey (ewmh def
@@ -23,14 +46,14 @@ main = do
         , clickJustFocuses   = True
         , borderWidth        = 2
         , modMask            = mod4Mask
-        , workspaces         = ["1","2","3","4","5","6","7","8","9"]
-        , normalBorderColor  = "#0f111a"
-        , focusedBorderColor = "#ffcc00"
+        , workspaces         = ["<icon=Haskell-White.xpm/>","\xf121","\xf268","4"]
+        , normalBorderColor  = cursorFColor
+        , focusedBorderColor = cursorBgColor
 
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
 
-        , layoutHook         = avoidStruts $ spacingRaw False (Border 5 5 15 15) True (Border 2 2 8 8) True $ reflectHoriz $ Tall 1 (3/100) (1/2) ||| Full
+        , layoutHook         = avoidStruts $ spacingRaw False (Border 5 5 15 15) True (Border 2 2 8 8) True $ reflectHoriz $ Tall 1 (1/20) (1/2) ||| Full
         , manageHook         = composeAll
             [ className =? "MPlayer"        --> doFloat
             , className =? "Gimp"           --> doFloat
@@ -48,7 +71,16 @@ main = do
             spawnOnce "xmonad --restart" })
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
-myPP = xmobarPP { ppCurrent = xmobarColor "#429942" "" . wrap "<" ">" }
+myPP = xmobarPP
+    { ppCurrent = xmobarColor "#429942" "" . wrap "[" "]"
+    , ppVisible = xmobarColor "#429942" ""
+    , ppHidden = xmobarColor "#429942" "" . wrap "*" " "
+    , ppHiddenNoWindows = xmobarColor "#429942" "" . wrap " " " "
+    , ppTitle = xmobarColor "#b3afc2" "" . shorten 60
+    , ppSep = "<fc=#666666> <fn=1>|</fn> </fc>"
+    , ppUrgent = xmobarColor "#c45500" "" . wrap "!" "!"
+    , ppExtras = [gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset]
+    , ppOrder = \(ws:t:ex) -> [ws]++ex++[t] }
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)

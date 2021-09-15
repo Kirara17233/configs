@@ -25,7 +25,7 @@ lightWhite = "#ffffff"
 
 main :: IO ()
 main = xmobar defaultConfig
-  { font = "xft:MesloLGS NF:style=Regular:pixelsize=13"
+  { font = "xft:MesloLGS NF:style=Regular:pixelsize=15"
   , additionalFonts = []
   , bgColor = backgroundColor
   , fgColor = foregroundColor
@@ -37,8 +37,9 @@ main = xmobar defaultConfig
   , iconRoot = "/etc/config/icons"
   , allDesktops = True
   , commands = 
-      [ Run $ Com "echo" ["<fn=3>\xf17c</fn>"] "penguin" 3600
-      , Run $ Com ".local/bin/kernel" [] "kernel" 36000
+      [ Run $ UnsafeStdinReader
+      , Run $ Com "echo" ["<fn=3>\xf17c</fn>"] "penguin" 3600
+      , Run $ Com "uname" ["-srm"] "kernel" 3600
       , Run $ Cpu ["-t", "<fn=2>\xf108</fn>  cpu: (<total>%)","-H","50","--high","red"] 20
       , Run $ Memory ["-t", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"] 20
       , Run $ DiskU [("/", "<fn=2>\xf0c7</fn>  hdd: <free> free")] [] 60
@@ -51,6 +52,5 @@ main = xmobar defaultConfig
       , Run $ UnsafeStdinReader ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = " <icon=Haskell-White.xpm/> <fc=#ffffff>|</fc> }{ <box type=Bottom width=2 mb=2 color=#51afef><fc=" ++  ++ ">%penguin%  <action=`alacritty -e htop`>%kernel%</action> </fc></box>"
+  , template = " <icon=Haskell-White.xpm/> <fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color=" ++ lightBlue ++ "><fc=" ++ lightBlue ++ ">%penguin%  <action=`termonad -e s`>%kernel%</action> </fc></box>"
 }
-
