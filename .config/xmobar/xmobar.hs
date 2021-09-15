@@ -25,7 +25,7 @@ lightWhite = "#ffffff"
 
 main :: IO ()
 main = xmobar defaultConfig
-  { font = "xft:MesloLGS NF:style=Regular:pixelsize=15"
+  { font = "xft:MesloLGS Nerd Font:style=Regular:pixelsize=17"
   , additionalFonts = []
   , bgColor = backgroundColor
   , fgColor = foregroundColor
@@ -39,7 +39,7 @@ main = xmobar defaultConfig
   , commands = 
       [ Run $ UnsafeStdinReader
       , Run $ Com "echo" ["<fn=3>\xf17c</fn>"] "penguin" 3600
-      , Run $ Com "uname" ["-srm"] "kernel" 3600
+      , Run $ Com "uname" ["-r"] "kernel" 3600
       , Run $ Cpu ["-t", "<fn=2>\xf108</fn>  cpu: (<total>%)","-H","50","--high","red"] 20
       , Run $ Memory ["-t", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"] 20
       , Run $ DiskU [("/", "<fn=2>\xf0c7</fn>  hdd: <free> free")] [] 60
@@ -52,5 +52,5 @@ main = xmobar defaultConfig
       , Run $ UnsafeStdinReader ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = " <icon=Haskell-White.xpm/> <fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color=" ++ lightBlue ++ "><fc=" ++ lightBlue ++ ">%penguin%  <action=`termonad -e s`>%kernel%</action> </fc></box>"
+  , template = "<icon=Haskell-White.xpm/><fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color="++blue++"><fc="++blue++">\xf303 <action=`termonad -e s`>%kernel%</action></fc></box>"
 }

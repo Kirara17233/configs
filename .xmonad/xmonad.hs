@@ -46,7 +46,7 @@ main = do
         , clickJustFocuses   = True
         , borderWidth        = 2
         , modMask            = mod4Mask
-        , workspaces         = ["<icon=Haskell-White.xpm/>","\xf121","\xf268","4"]
+        , workspaces         = ["\xf489 Terminal","\xf268 Chrome","\xf121 Code","\xfb0f VSCode"]
         , normalBorderColor  = cursorFColor
         , focusedBorderColor = cursorBgColor
 
@@ -72,15 +72,15 @@ main = do
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = xmobarPP
-    { ppCurrent = xmobarColor "#429942" "" . wrap "[" "]"
-    , ppVisible = xmobarColor "#429942" ""
-    , ppHidden = xmobarColor "#429942" "" . wrap "*" " "
-    , ppHiddenNoWindows = xmobarColor "#429942" "" . wrap " " " "
-    , ppTitle = xmobarColor "#b3afc2" "" . shorten 60
-    , ppSep = "<fc=#666666> <fn=1>|</fn> </fc>"
-    , ppUrgent = xmobarColor "#c45500" "" . wrap "!" "!"
+    { ppCurrent = xmobarColor white "" . wrap ("<box type=Bottom width=2 mb=2 color="++white++">") "</box>"
+    , ppVisible = xmobarColor white ""
+    , ppHidden = xmobarColor purple "" . wrap ("<box type=Bottom width=2 mb=2 color="++purple++">") "</box>"
+    , ppHiddenNoWindows = xmobarColor "#ffffff" "" . wrap ("<fc="++purple++">") "</fc>"
+    , ppTitle = xmobarColor "#ffffff" "" . shorten 60
+    , ppSep = "<fc=#ffffff> <fn=1>|</fn> </fc>"
+    , ppUrgent = xmobarColor "#ffffff" "" . wrap "!" "!"
     , ppExtras = [gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset]
-    , ppOrder = \(ws:t:ex) -> [ws]++ex++[t] }
+    , ppOrder = \(ws:l:t:ex) -> [ws]++ex++[t] }
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
