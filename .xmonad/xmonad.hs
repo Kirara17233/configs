@@ -46,7 +46,7 @@ main = do
         , clickJustFocuses   = True
         , borderWidth        = 2
         , modMask            = mod4Mask
-        , workspaces         = ["\xf489 Terminal","\xf268 Chrome","\xf121 Code","\xfb0f VSCode"]
+        , workspaces         = ["<fn=1>\xf489</fn>","<fn=1>\xf268</fn>","<fn=1>\xf121</fn>","<fn=1>\xfb0f</fn>"]
         , normalBorderColor  = cursorFColor
         , focusedBorderColor = cursorBgColor
 

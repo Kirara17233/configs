@@ -25,8 +25,10 @@ lightWhite = "#ffffff"
 
 main :: IO ()
 main = xmobar defaultConfig
-  { font = "xft:MesloLGS Nerd Font:style=Regular:pixelsize=17"
-  , additionalFonts = []
+  { font = "xft:MesloLGS NF:style=Regular:pixelsize=13"
+  , additionalFonts =
+      [ "xft:Symbols Nerd Font:style=2048-em:pixelsize=15"
+      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=30" ]
   , bgColor = backgroundColor
   , fgColor = foregroundColor
   , position = TopSize L 50 21
@@ -52,5 +54,5 @@ main = xmobar defaultConfig
       , Run $ UnsafeStdinReader ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "<icon=Haskell-White.xpm/><fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color="++blue++"><fc="++blue++">\xf303 <action=`termonad -e s`>%kernel%</action></fc></box>"
+  , template = "<fn=2><fc="++white++">\xe61f</fc></fn><fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color="++blue++"><fc="++blue++"><fn=1>\xf303</fn> <action=`termonad -e s`>%kernel%</action></fc></box>"
 }
