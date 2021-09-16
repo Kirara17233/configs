@@ -54,5 +54,5 @@ main = xmobar defaultConfig
       , Run $ UnsafeStdinReader ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "<fn=2><fc="++white++">\xe61f</fc></fn><fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color="++blue++"><fc="++blue++"><fn=1>\xf303</fn> <action=`termonad -e s`>%kernel%</action></fc></box>"
+  , template = "<icon=Haskell-White.xpm/><fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color="++blue++"><fc="++blue++"><fn=1>\xf303</fn> <action=`termonad -e s`>%kernel%</action></fc></box>"
 }
