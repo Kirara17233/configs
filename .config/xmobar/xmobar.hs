@@ -23,12 +23,21 @@ lightPurple = "#c792ea"
 lightCyan = "#89ddff"
 lightWhite = "#ffffff"
 
+cpu = blue
+memory = green
+storage = yellow
+dateColor = red
+
 main :: IO ()
 main = xmobar defaultConfig
   { font = "xft:MesloLGS NF:style=Regular:pixelsize=13"
   , additionalFonts =
-      [ "xft:Symbols Nerd Font:style=2048-em:pixelsize=15"
-      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=30" ]
+      [ "xft:MesloLGS NF:style=Regular:pixelsize=14"
+      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:pixelsize=17"
+      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=17"
+      , "xft:Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:pixelsize=17"
+      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=18"
+      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=21" ]
   , bgColor = backgroundColor
   , fgColor = foregroundColor
   , position = TopSize L 50 21
@@ -40,19 +49,15 @@ main = xmobar defaultConfig
   , allDesktops = True
   , commands = 
       [ Run $ UnsafeStdinReader
-      , Run $ Com "echo" ["<fn=3>\xf17c</fn>"] "penguin" 3600
-      , Run $ Com "uname" ["-r"] "kernel" 3600
-      , Run $ Cpu ["-t", "<fn=2>\xf108</fn>  cpu: (<total>%)","-H","50","--high","red"] 20
-      , Run $ Memory ["-t", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"] 20
-      , Run $ DiskU [("/", "<fn=2>\xf0c7</fn>  hdd: <free> free")] [] 60
-      , Run $ Com "echo" ["<fn=2>\xf0aa</fn>"] "uparrow" 3600
-      , Run $ Uptime ["-t", "uptime: <days>d <hours>h"] 360
-      , Run $ Com "echo" ["<fn=2>\xf0f3</fn>"] "bell" 3600
-      , Run $ Com ".local/bin/pacupdate" [] "pacupdate" 36000
-      , Run $ Date "<fn=2>\xf017</fn>  %b %d %Y - (%H:%M) " "date" 50
-      , Run $ Com "/home/dt/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
-      , Run $ UnsafeStdinReader ]
+      , Run $ Cpu ["-t", "<total>%"] 10
+      , Run $ Memory ["-t", "<used>/<total>M <usedratio>%"] 10
+      , Run $ DiskU [("/", "<used>/<size>")] [] 10
+      , Run $ Date "%m/%d/%Y" "date" 10 ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "<icon=Haskell-White.xpm/><fc=#ffffff>|</fc> %UnsafeStdinReader%}{<box type=Bottom width=2 mb=2 color="++blue++"><fc="++blue++"><fn=1>\xf303</fn> <action=`termonad -e s`>%kernel%</action></fc></box>"
+  , template = "<icon=Haskell-White.xpm/><fn=1><fc="++highlightFgColor++">|</fc> %UnsafeStdinReader%</fn>}{"
+      ++"<box type=Bottom width=2 mb=2 color="++cpu++"><fc="++cpu++"><fn=6>\xf85a</fn><fn=1> %cpu%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=2 color="++memory++"><fc="++memory++"><fn=3>\xf538</fn><fn=1> %memory%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=2 color="++storage++"><fc="++storage++"><fn=5>\xf7c9</fn><fn=1> %disku%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=2 color="++dateColor++"><fc="++dateColor++"><fn=3>\xf073</fn><fn=1> %date%</fn></fc></box> "
 }

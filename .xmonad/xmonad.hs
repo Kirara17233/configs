@@ -46,7 +46,7 @@ main = do
         , clickJustFocuses   = True
         , borderWidth        = 2
         , modMask            = mod4Mask
-        , workspaces         = ["<fn=1>\xf489</fn>","<fn=1>\xf268</fn>","<fn=1>\xf121</fn>","<fn=1>\xfb0f</fn>"]
+        , workspaces         = ["<fn=3>\xf120</fn>","<fn=5>\xf268</fn>","<fn=3>\xf121</fn>","<fn=6>\xfb0f</fn>"]
         , normalBorderColor  = cursorFColor
         , focusedBorderColor = cursorBgColor
 
@@ -72,12 +72,12 @@ main = do
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = xmobarPP
-    { ppCurrent = xmobarColor white "" . wrap ("<box type=Bottom width=2 mb=2 color="++white++">") "</box>"
+    { ppCurrent = xmobarColor cursorBgColor "" . wrap ("<box type=Bottom width=2 mb=2 color="++cursorBgColor++">") "</box>"
     , ppVisible = xmobarColor white ""
     , ppHidden = xmobarColor purple "" . wrap ("<box type=Bottom width=2 mb=2 color="++purple++">") "</box>"
-    , ppHiddenNoWindows = xmobarColor "#ffffff" "" . wrap ("<fc="++purple++">") "</fc>"
-    , ppTitle = xmobarColor "#ffffff" "" . shorten 60
-    , ppSep = "<fc=#ffffff> <fn=1>|</fn> </fc>"
+    , ppHiddenNoWindows = xmobarColor purple "" . wrap ("<fc="++purple++">") "</fc>"
+    , ppTitle = xmobarColor cursorBgColor "" . shorten 60
+    , ppSep = "<fc="++highlightFgColor++"> | </fc>"
     , ppUrgent = xmobarColor "#ffffff" "" . wrap "!" "!"
     , ppExtras = [gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset]
     , ppOrder = \(ws:l:t:ex) -> [ws]++ex++[t] }
