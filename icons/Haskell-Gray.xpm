@@ -1,7 +1,7 @@
 /* XPM */
 static char *Haskell_Gray[] = {
 /* columns rows colors chars-per-pixel */
-"28 20 4 1 ",
+"28 20 3 1 ",
 "  c None",
 ". c #666666",
 "X c #999999",
