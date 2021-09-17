@@ -55,7 +55,7 @@ main = xmobar defaultConfig
       , Run $ Date "%m/%d/%Y" "date" 10 ]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "<icon=Arch-Blue.xpm/><fn=1><fc="++highlightFgColor++">|</fc> %UnsafeStdinReader%</fn>}{"
+  , template = "<icon=Haskell-White.xpm/><fn=1><fc="++highlightFgColor++">|</fc> %UnsafeStdinReader%</fn>}{"
       ++"<box type=Bottom width=2 mb=2 color="++cpu++"><fc="++cpu++"><fn=6>\xf85a</fn><fn=1> %cpu%</fn></fc></box> "
       ++"<box type=Bottom width=2 mb=2 color="++memory++"><fc="++memory++"><fn=3>\xf538</fn><fn=1> %memory%</fn></fc></box> "
       ++"<box type=Bottom width=2 mb=2 color="++storage++"><fc="++storage++"><fn=5>\xf7c9</fn><fn=1> %disku%</fn></fc></box> "
