@@ -38,6 +38,8 @@ lightPurple = "#c792ea"
 lightCyan = "#89ddff"
 lightWhite = "#ffffff"
 
+workSpaces = ["<fn=3>\xf120</fn>","<fn=5>\xf268</fn>","<fn=3>\xf121</fn>","<fn=7>\xfb0f</fn>"]
+
 main :: IO ()
 main = do
     xmonad =<< statusBar "ghc --make .config/xmobar/xmobar.hs -dynamic -threaded && xmobar" myPP toggleStrutsKey (ewmh def
@@ -46,7 +48,7 @@ main = do
         , clickJustFocuses   = True
         , borderWidth        = 2
         , modMask            = mod4Mask
-        , workspaces         = ["<fn=3>\xf120</fn>","<fn=5>\xf268</fn>","<fn=3>\xf121</fn>","<fn=7>\xfb0f</fn>"]
+        , workspaces         = workSpaces
         , normalBorderColor  = cursorFColor
         , focusedBorderColor = cursorBgColor
 
@@ -55,10 +57,9 @@ main = do
 
         , layoutHook         = avoidStruts $ spacingRaw False (Border 5 5 15 15) True (Border 2 2 8 8) True $ reflectHoriz $ Tall 1 (1/20) (1/2) ||| Full
         , manageHook         = composeAll
-            [ className =? "MPlayer"        --> doFloat
-            , className =? "Gimp"           --> doFloat
-            , resource  =? "desktop_window" --> doIgnore
-            , resource  =? "kdesktop"       --> doIgnore ]
+            [ className =? "Termonad-linux-x86_64"  --> doShift (workSpaces !! 0)
+            , className =? "Google-chrome"          --> doShift (workSpaces !! 1)
+            , className =? "Code"                   --> doShift (workSpaces !! 3) ]
         , handleEventHook    = fullscreenEventHook
         , logHook            = return () >> setWMName "LG3D"
         , startupHook        = do
