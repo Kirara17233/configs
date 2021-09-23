@@ -52,8 +52,8 @@ main = xmobar defaultConfig
   , commands = 
       [ Run $ UnsafeStdinReader
       , Run $ Cpu ["-t", "<total>%"] 10
-      , Run $ Memory ["-t", "<used>/<total>M <usedratio>%"] 10
-      , Run $ DiskU [("/", "<used>/<size>")] [] 10
+      , Run $ Memory ["-t", "<usedratio>%"] 10
+      , Run $ DiskU [("/", "<free>")] [] 10
       , Run $ Com "/etc/config/bin/download.sh" [] "download" 10
       , Run $ Com "/etc/config/bin/upload.sh" [] "upload" 10
       , Run $ Date "%m/%d/%Y" "date" 10 ]
