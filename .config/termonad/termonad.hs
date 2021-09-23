@@ -62,14 +62,14 @@ myTMConfig =
 main :: IO ()
 main = do
   myColourExt <- createColourExtension (defaultColourConfig
-    { cursorFgColour    = Set $ createColour  15  17  26
-    , cursorBgColour    = Set $ createColour 255 204   0
-    , foregroundColour  = Set $ createColour 143 147 162
-    , backgroundColour  = Set $ createColour  15  17  26
-    , highlightFgColour = Set $ createColour 143 147 162
-    , highlightBgColour = Set $ createColour  31  34  51
+    { cursorFgColour    = Set $ createColour 255 255 255
+    , cursorBgColour    = Set $ createColour 255 255 255
+    , foregroundColour  = Set $ createColour 238 255 255
+    , backgroundColour  = Set $ createColour  33  33  33
+    , highlightFgColour = Set $ createColour  84  84  84
+    , highlightBgColour = Set $ createColour 238 255 255
     , palette = ExtendedPalette (fromMaybe defaultStandardColours $ mkList8
-        [ createColour  84 110 122
+        [ createColour   0   0   0
         , createColour 255  83 112
         , createColour 195 232 141
         , createColour 255 203 107
@@ -77,7 +77,7 @@ main = do
         , createColour 199 146 234
         , createColour 137 221 255
         , createColour 255 255 255 ]) $ fromMaybe defaultStandardColours $ mkList8
-        [ createColour  84 110 122
+        [ createColour  84  84  84
         , createColour 255  83 112
         , createColour 195 232 141
         , createColour 255 203 107
