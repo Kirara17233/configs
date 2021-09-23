@@ -12,7 +12,7 @@ s() {
 
 preTX=`cat /etc/upload`
 
-TX=`echo \`ip -s link ls ens33 | sed -n '4p'\` | cut -d ' ' -f 1`
+TX=`echo \`ip -s link ls ens33 | sed -n '6p'\` | cut -d ' ' -f 1`
 
 sudo zsh -c "echo $TX > /etc/upload"
 
