@@ -57,8 +57,9 @@ main = do
 
         , layoutHook         = avoidStruts $ spacingRaw False (Border 5 5 15 15) True (Border 2 2 8 8) True $ reflectHoriz $ Tall 1 (1/20) (1/2) ||| Full
         , manageHook         = composeAll
-            [ className =? "Google-chrome"          --> doShift (workSpaces !! 1)
-            , className =? "Code"                   --> doShift (workSpaces !! 2) ]
+            [ className =? "Google-chrome"  --> doShift (workSpaces !! 1)
+            , className =? "Code"           --> doShift (workSpaces !! 2)
+            , className =? "jetbrains-idea" --> doShift (workSpaces !! 3) ]
         , handleEventHook    = fullscreenEventHook
         , logHook            = return () >> setWMName "LG3D"
         , startupHook        = do
