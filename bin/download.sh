@@ -2,9 +2,9 @@
 
 s() {
   if [ $1 -ge 1048576 ]; then
-    echo `awk "BEGIN{printf(\"%.2f\",$1/1048576)}"`MB/s
+    echo `awk "BEGIN{printf(\"%.1f\",$1/1048576)}"`MB/s
   elif [ $1 -ge 1024 ]; then
-    echo `awk "BEGIN{printf(\"%.2f\",$1/1024)}"`KB/s
+    echo `awk "BEGIN{printf(\"%.1f\",$1/1024)}"`KB/s
   else
   echo $(($1))B/s
   fi
