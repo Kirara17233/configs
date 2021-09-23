@@ -24,8 +24,9 @@ lightCyan = "#89ddff"
 lightWhite = "#ffffff"
 
 cpu = blue
-memory = green
-storage = yellow
+memory = cyan
+storage = green
+network = yellow
 dateColor = red
 
 main :: IO ()
@@ -52,6 +53,8 @@ main = xmobar defaultConfig
       , Run $ Cpu ["-t", "<total>%"] 10
       , Run $ Memory ["-t", "<used>/<total>M <usedratio>%"] 10
       , Run $ DiskU [("/", "<used>/<size>")] [] 10
+      , Run $ Com "/etc/config/bin/download.sh" [] "download" 10
+      , Run $ Com "/etc/config/bin/upload.sh" [] "upload" 10
       , Run $ Date "%m/%d/%Y" "date" 10 ]
   , sepChar = "%"
   , alignSep = "}{"
@@ -59,5 +62,6 @@ main = xmobar defaultConfig
       ++"<box type=Bottom width=2 mb=2 color="++cpu++"><fc="++cpu++"><fn=6>\xf85a</fn><fn=1> %cpu%</fn></fc></box> "
       ++"<box type=Bottom width=2 mb=2 color="++memory++"><fc="++memory++"><fn=3>\xf538</fn><fn=1> %memory%</fn></fc></box> "
       ++"<box type=Bottom width=2 mb=2 color="++storage++"><fc="++storage++"><fn=5>\xf7c9</fn><fn=1> %disku%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=2 color="++network++"><fc="++network++"><fn=5>\xf019</fn><fn=1> %download% </fn><fn=5>\xf6d9</fn><fn=1>%upload%</fn></fc></box> "
       ++"<box type=Bottom width=2 mb=2 color="++dateColor++"><fc="++dateColor++"><fn=3>\xf073</fn><fn=1> %date%</fn></fc></box> "
 }
