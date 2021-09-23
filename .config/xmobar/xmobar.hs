@@ -34,12 +34,12 @@ main = xmobar defaultConfig
   { font = "xft:MesloLGS NF:style=Regular:pixelsize=13"
   , additionalFonts =
       [ "xft:MesloLGS NF:style=Regular:pixelsize=14"
-      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular:pixelsize=17"
       , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=17"
-      , "xft:Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular:pixelsize=17"
-      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=17"
+      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=19"
+      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=21"
       , "xft:Symbols Nerd Font:style=2048-em:pixelsize=18"
-      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=21" ]
+      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=20"
+      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=22" ]
   , bgColor = backgroundColor
   , fgColor = foregroundColor
   , position = TopSize L 50 21
@@ -60,9 +60,9 @@ main = xmobar defaultConfig
   , sepChar = "%"
   , alignSep = "}{"
   , template = "<icon=Haskell-White.xpm/><fn=1><fc="++highlightFgColor++">|</fc> %UnsafeStdinReader%</fn>}{"
-      ++"<box type=Bottom width=2 mb=2 color="++cpu++"><fc="++cpu++"><fn=7>\xf85a</fn><fn=1> %cpu%</fn></fc></box> "
-      ++"<box type=Bottom width=2 mb=2 color="++memory++"><fc="++memory++"><fn=3>\xf538</fn><fn=1> %memory%</fn></fc></box> "
-      ++"<box type=Bottom width=2 mb=2 color="++storage++"><fc="++storage++"><fn=6>\xf7c9</fn><fn=1> %disku%</fn></fc></box> "
-      ++"<box type=Bottom width=2 mb=2 color="++network++"><fc="++network++"><fn=5>\xf019</fn><fn=1> %download% </fn><fn=5>\xf093</fn><fn=1> %upload%</fn></fc></box> "
-      ++"<box type=Bottom width=2 mb=2 color="++dateColor++"><fc="++dateColor++"><fn=3>\xf073</fn><fn=1> %date%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=1 color="++cpu++"><fc="++cpu++"><fn=7>\xf85a</fn><fn=1> %cpu%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=1 color="++memory++"><fc="++memory++"><fn=4>\xf538</fn><fn=1> %memory%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=1 color="++storage++"><fc="++storage++"><fn=6>\xf7c9</fn><fn=1> %disku%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=1 color="++network++"><fc="++network++"><fn=5>\xf019</fn><fn=1> %download% </fn><fn=5>\xf093</fn><fn=1> %upload%</fn></fc></box> "
+      ++"<box type=Bottom width=2 mb=1 color="++dateColor++"><fc="++dateColor++"><fn=2>\xf073</fn><fn=1> %date%</fn></fc></box> "
 }

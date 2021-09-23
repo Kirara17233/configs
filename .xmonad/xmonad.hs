@@ -46,7 +46,7 @@ main = do
         , clickJustFocuses   = True
         , borderWidth        = 2
         , modMask            = mod4Mask
-        , workspaces         = ["<fn=3>\xf120</fn>","<fn=5>\xf268</fn>","<fn=3>\xf121</fn>","<fn=6>\xfb0f</fn>"]
+        , workspaces         = ["<fn=3>\xf120</fn>","<fn=5>\xf268</fn>","<fn=3>\xf121</fn>","<fn=7>\xfb0f</fn>"]
         , normalBorderColor  = cursorFColor
         , focusedBorderColor = cursorBgColor
 
@@ -72,9 +72,9 @@ main = do
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 myPP = xmobarPP
-    { ppCurrent = xmobarColor cursorBgColor "" . wrap ("<box type=Bottom width=2 mb=2 color="++cursorBgColor++">") "</box>"
-    , ppVisible = xmobarColor white ""
-    , ppHidden = xmobarColor purple "" . wrap ("<box type=Bottom width=2 mb=2 color="++purple++">") "</box>"
+    { ppCurrent = xmobarColor foregroundColor "" . wrap ("<box type=Bottom width=2 mb=1 color="++foregroundColor++">") "</box>"
+    , ppVisible = xmobarColor foregroundColor ""
+    , ppHidden = xmobarColor purple "" . wrap ("<box type=Bottom width=2 mb=1 color="++purple++">") "</box>"
     , ppHiddenNoWindows = xmobarColor purple "" . wrap ("<fc="++purple++">") "</fc>"
     , ppTitle = xmobarColor cursorBgColor "" . shorten 60
     , ppSep = "<fc="++highlightFgColor++"> | </fc>"
