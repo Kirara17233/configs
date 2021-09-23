@@ -78,10 +78,9 @@ myPP = xmobarPP
     , ppHidden = xmobarColor purple "" . wrap ("<box type=Bottom width=2 mb=1 color="++purple++">") "</box>"
     , ppHiddenNoWindows = xmobarColor purple "" . wrap ("<fc="++purple++">") "</fc>"
     , ppTitle = xmobarColor cursorBgColor "" . shorten 60
-    , ppSep = "<fc="++highlightFgColor++"> | </fc>"
-    , ppUrgent = xmobarColor "#ffffff" "" . wrap "!" "!"
+    , ppSep = "<fc="++foregroundColor++"> | </fc>"
     , ppExtras = [gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset]
-    , ppOrder = \(ws:l:t:ex) -> [ws]++ex++[t] }
+    , ppOrder = \(ws:l:t:ex) -> [ws]++[t] }
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
