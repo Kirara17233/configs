@@ -39,7 +39,8 @@ main = xmobar defaultConfig
       , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=21"
       , "xft:Symbols Nerd Font:style=2048-em:pixelsize=18"
       , "xft:Symbols Nerd Font:style=2048-em:pixelsize=20"
-      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=22" ]
+      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=22"
+      , "xft:Symbols Nerd Font:style=2048-em:pixelsize=23" ]
   , bgColor = backgroundColor
   , fgColor = foregroundColor
   , position = TopSize L 50 21

@@ -38,7 +38,7 @@ lightPurple = "#c792ea"
 lightCyan = "#89ddff"
 lightWhite = "#ffffff"
 
-workSpaces = ["<fn=7>\xf489</fn>","<fn=5>\xf268</fn>","<fn=7>\xfb0f</fn>","<fn=3>\xf121</fn>"]
+workSpaces = ["<fn=8>\xf489</fn>","<fn=5>\xf268</fn>","<fn=7>\xfb0f</fn>","<fn=3>\xf121</fn>"]
 
 main :: IO ()
 main = do
