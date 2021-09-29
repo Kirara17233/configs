@@ -59,6 +59,7 @@ main = do
         , manageHook         = composeAll
             [ className =? "Google-chrome"  --> doShift (workSpaces !! 1)
             , className =? "Code"           --> doShift (workSpaces !! 2)
+            , className =? "Emacs"          --> doShift (workSpaces !! 3)
             , className =? "jetbrains-idea" --> doShift (workSpaces !! 3) ]
         , handleEventHook    = fullscreenEventHook
         , logHook            = return () >> setWMName "LG3D"
