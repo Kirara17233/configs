@@ -34,9 +34,9 @@ main = xmobar defaultConfig
   { font = "xft:MesloLGS NF:style=Regular:pixelsize=13"
   , additionalFonts =
       [ "xft:Noto Sans CJK SC:style=Regular:pixelsize=15"
-      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=17"
-      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=19"
-      , "xft:Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid:pixelsize=21"
+      , "xft:Font Awesome 6 Free,Font Awesome 6 Free Solid:style=Solid:pixelsize=17"
+      , "xft:Font Awesome 6 Free,Font Awesome 6 Free Solid:style=Solid:pixelsize=19"
+      , "xft:Font Awesome 6 Free,Font Awesome 6 Free Solid:style=Solid:pixelsize=21"
       , "xft:Symbols Nerd Font:style=2048-em:pixelsize=18"
       , "xft:Symbols Nerd Font:style=2048-em:pixelsize=20"
       , "xft:Symbols Nerd Font:style=2048-em:pixelsize=22"
