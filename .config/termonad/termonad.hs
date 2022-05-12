@@ -62,29 +62,29 @@ myTMConfig =
 main :: IO ()
 main = do
   myColourExt <- createColourExtension (defaultColourConfig
-    { cursorFgColour    = Set $ createColour 255 255 255
-    , cursorBgColour    = Set $ createColour 255 255 255
-    , foregroundColour  = Set $ createColour 238 255 255
-    , backgroundColour  = Set $ createColour  33  33  33
-    , highlightFgColour = Set $ createColour  84  84  84
-    , highlightBgColour = Set $ createColour 238 255 255
+    { cursorFgColour    = Set $ createColour  21  21  21
+    , cursorBgColour    = Set $ createColour 208 208 208
+    , foregroundColour  = Set $ createColour 197 200 198
+    , backgroundColour  = Set $ createColour  22  23  25
+    , highlightFgColour = Set $ createColour 197 200 198
+    , highlightBgColour = Set $ createColour  68  68  68
     , palette = ExtendedPalette (fromMaybe defaultStandardColours $ mkList8
         [ createColour   0   0   0
-        , createColour 255  83 112
-        , createColour 195 232 141
-        , createColour 255 203 107
-        , createColour 130 170 255
-        , createColour 199 146 234
-        , createColour 137 221 255
-        , createColour 255 255 255 ]) $ fromMaybe defaultStandardColours $ mkList8
-        [ createColour  84  84  84
-        , createColour 255  83 112
-        , createColour 195 232 141
-        , createColour 255 203 107
-        , createColour 130 170 255
-        , createColour 199 146 234
-        , createColour 137 221 255
-        , createColour 255 255 255 ]})
+        , createColour 253  95 241
+        , createColour 135 195 138
+        , createColour 255 215 177
+        , createColour 133 190 253
+        , createColour 185 182 252
+        , createColour 133 190 253
+        , createColour 224 224 224 ]) $ fromMaybe defaultStandardColours $ mkList8
+        [ createColour   0   0   0
+        , createColour 253  95 241
+        , createColour 148 250  54
+        , createColour 245 255 168
+        , createColour 150 203 254
+        , createColour 185 182 252
+        , createColour 133 190 253
+        , createColour 224 224 224 ]})
 
   let newTMConfig = addColourExtension myTMConfig myColourExt
 
