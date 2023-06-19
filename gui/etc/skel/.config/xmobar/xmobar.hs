@@ -48,15 +48,15 @@ main = xmobar defaultConfig
   , pickBroadest = False
   , persistent = False
   , hideOnStart = False
-  , iconRoot = "/etc/configs/icons"
+  , iconRoot = "/configs/icons"
   , allDesktops = True
   , commands = 
       [ Run $ UnsafeStdinReader
       , Run $ Cpu ["-t", "<total>%"] 10
       , Run $ Memory ["-t", "<usedratio>%"] 10
       , Run $ DiskU [("/", "<free>")] [] 10
-      , Run $ Com "/etc/configs/bin/download.sh" [] "download" 10
-      , Run $ Com "/etc/configs/bin/upload.sh" [] "upload" 10
+      , Run $ Com "download.sh" [] "download" 10
+      , Run $ Com "upload.sh" [] "upload" 10
       , Run $ Date "%m/%d/%Y" "date" 10 ]
   , sepChar = "%"
   , alignSep = "}{"
