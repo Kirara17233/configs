@@ -1,1 +1,1 @@
-/configs/cli/root/.zshrc
+../../root/.zshrc
