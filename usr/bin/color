@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+
+sudo ln -sf $1 /etc/colors/main

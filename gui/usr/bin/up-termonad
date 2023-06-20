@@ -1,5 +1,1 @@
-#!/usr/bin/zsh
-
-sudo git --git-dir=/etc/termonad/.git --work-tree=/etc/termonad pull
-(cd /etc/termonad && sudo nix-build)
-sudo cp /etc/termonad/result/bin/termonad /usr/bin
+/configs/usr/bin/up-termonad
